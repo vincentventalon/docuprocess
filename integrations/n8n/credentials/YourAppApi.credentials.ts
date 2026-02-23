@@ -8,7 +8,7 @@ import type {
 export class YourAppApi implements ICredentialType {
 	name = 'yourAppApi';
 	displayName = 'YourApp API';
-	documentationUrl = 'https://example.com/docs';
+	documentationUrl = 'https://www.parsedocu.com/docs';
 	properties: INodeProperties[] = [
 		{
 			displayName: 'API Key',
@@ -18,7 +18,7 @@ export class YourAppApi implements ICredentialType {
 			default: '',
 			required: true,
 			description:
-				'Your API key. Get it from <a href="https://example.com/dashboard/api" target="_blank">your dashboard</a>.',
+				'Your API key. Get it from <a href="https://www.parsedocu.com/dashboard/api" target="_blank">your dashboard</a>.',
 		},
 	];
 
@@ -33,7 +33,7 @@ export class YourAppApi implements ICredentialType {
 
 	test: ICredentialTestRequest = {
 		request: {
-			baseURL: 'https://api.example.com',
+			baseURL: 'https://api.parsedocu.com',
 			url: '/v1/account',
 			method: 'GET',
 		},

@@ -3,7 +3,6 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import FeatureShowcase from '@/components/FeatureShowcase';
-import FeatureShowcase2 from '@/components/FeatureShowcase2';
 import Integrations from '@/components/Integrations';
 import { getSEOTags, renderSchemaTags, renderWebSiteSchema } from "@/libs/seo";
 import config from "@/config";
@@ -43,7 +42,6 @@ export default function Home() {
         {renderWebSiteSchema()}
         <Hero />
         <FeatureShowcase />
-        <FeatureShowcase2 />
         <Integrations />
       </main>
       <Footer />

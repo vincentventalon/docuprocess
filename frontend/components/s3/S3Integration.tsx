@@ -422,7 +422,7 @@ export function S3Integration() {
                 your S3 bucket:
               </p>
               <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg text-sm overflow-x-auto">
-                {`curl -X POST https://api.example.com/v1/pdf/create \\
+                {`curl -X POST https://api.parsedocu.com/v1/pdf/create \\
   -H "x-api-key: YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{

@@ -44,5 +44,5 @@ export function getBackendHeaders(accessToken: string): Record<string, string> {
  * Get the backend API base URL.
  */
 export function getBackendUrl(): string {
-  return process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.example.com";
+  return process.env.NEXT_PUBLIC_BACKEND_URL || "https://api.parsedocu.com";
 }

@@ -1,6 +1,6 @@
 const test = async (z, bundle) => {
   const options = {
-    url: 'https://api.example.com/v1/account',
+    url: 'https://api.parsedocu.com/v1/account',
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -22,7 +22,7 @@ module.exports = {
   fields: [
     {
       helpText:
-        'You can get your Api key https://example.com/dashboard/api once connected',
+        'You can get your Api key https://www.parsedocu.com/dashboard/api once connected',
       computed: false,
       key: 'api_key',
       required: true,

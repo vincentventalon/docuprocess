@@ -4,7 +4,7 @@
         "type": "text",
         "label": "URL",
         "required": true,
-        "help": "Enter a path relative to the base URL (e.g., /v1/templates). Available endpoints: https://example.com/docs/api"
+        "help": "Enter a path relative to the base URL (e.g., /v1/templates). Available endpoints: https://www.parsedocu.com/docs/api"
     },
     {
         "name": "method",

@@ -343,7 +343,7 @@ export default function PlaygroundPage() {
         <CardContent>
           <div className="bg-slate-900 rounded-lg p-4 font-mono text-sm overflow-x-auto">
             <pre className="text-green-400">
-{`curl -X POST https://api.docuprocess.com/v1/convert/pdf-to-markdown \\
+{`curl -X POST https://api.parsedocu.com/v1/convert/pdf-to-markdown \\
   -H "x-api-key: YOUR_API_KEY" \\
   -H "Content-Type: application/json" \\
   -d '{"url": "https://example.com/document.pdf"}'`}

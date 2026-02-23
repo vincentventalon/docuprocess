@@ -48,7 +48,7 @@ def get_openapi_schema() -> dict:
             "type": "apiKey",
             "in": "header",
             "name": "x-api-key",
-            "description": "API key for authentication. Get yours at https://example.com/dashboard/api-keys",
+            "description": "API key for authentication. Get yours at https://www.parsedocu.com/dashboard/api-keys",
         }
     }
 
@@ -375,23 +375,23 @@ def convert_openapi_to_postman(openapi_schema: dict) -> dict:
                 "- **No-code friendly** - Works seamlessly with Zapier, Make, n8n and other automation tools\n\n"
                 "## Authentication\n\n"
                 "All API endpoints require authentication via an API key passed in the `x-api-key` header. "
-                "You can find your API key in the [YourApp Dashboard](https://example.com/dashboard/api-keys).\n\n"
+                "You can find your API key in the [ParseDocu Dashboard](https://www.parsedocu.com/dashboard/api-keys).\n\n"
                 "```\nx-api-key: YOUR_API_KEY\n```\n\n"
                 "## Base URL\n\n"
                 "All API requests should be made to:\n\n"
-                "```\nhttps://api.example.com\n```\n\n"
+                "```\nhttps://api.parsedocu.com\n```\n\n"
                 "## Credits\n\n"
                 "- PDF generation costs **1 credit** per successful request\n"
                 "- All other endpoints (templates, account, integrations) are **free** to use\n"
                 "- Check your balance anytime with `GET /v1/account`\n\n"
                 "## Quick Start\n\n"
-                "1. Create a template at [example.com](https://example.com)\n"
+                "1. Create a template at [parsedocu.com](https://www.parsedocu.com)\n"
                 "2. Copy your template ID from the dashboard\n"
                 "3. Call `POST /v1/pdf/create` with your template ID and data\n"
                 "4. Receive a signed URL to download your PDF\n\n"
                 "## Support\n\n"
-                "- Documentation: [example.com/docs](https://example.com/docs)\n"
-                "- Swagger UI: [api.example.com/docs](https://api.example.com/docs)\n"
+                "- Documentation: [parsedocu.com/docs](https://www.parsedocu.com/docs)\n"
+                "- Swagger UI: [api.parsedocu.com/docs](https://api.parsedocu.com/docs)\n"
             ),
             "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
         },
@@ -404,7 +404,7 @@ def convert_openapi_to_postman(openapi_schema: dict) -> dict:
             ],
         },
         "variable": [
-            {"key": "base_url", "value": "https://api.example.com"},
+            {"key": "base_url", "value": "https://api.parsedocu.com"},
             {"key": "api_key", "value": "YOUR_API_KEY"},
             {"key": "template_id", "value": "YOUR_TEMPLATE_ID"},
         ],

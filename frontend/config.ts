@@ -2,12 +2,12 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "DocuProcess",
+  appName: "ParseDocu",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
     "PDF to Markdown API. Extract text from any PDF while preserving structure, headings, and formatting. One API call, clean Markdown output.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "docuprocess.com",
+  domainName: "www.parsedocu.com",
   // crisp: {
   //   // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (resend.supportEmail) otherwise customer support won't work.
   //   id: "",
@@ -102,11 +102,11 @@ const config = {
   },
   resend: {
     // REQUIRED — Email 'From' field to be used when sending magic login links
-    fromNoReply: `MyApp <noreply@email.example.com>`,
+    fromNoReply: `ParseDocu <noreply@parsedocu.com>`,
     // REQUIRED — Email 'From' field to be used when sending other emails, like abandoned carts, updates etc..
-    fromAdmin: `Support <support@example.com>`,
+    fromAdmin: `ParseDocu Support <support@parsedocu.com>`,
     // Email shown to customer if need support. Leave empty if not needed => if empty, set up Crisp above, otherwise you won't be able to offer customer support."
-    supportEmail: "support@example.com",
+    supportEmail: "support@parsedocu.com",
   },
   colors: {
     // REQUIRED — The DaisyUI theme to use (added to the main layout.js). Leave blank for default (light & dark mode). If you any other theme than light/dark, you need to add it in config.tailwind.js in daisyui.themes.

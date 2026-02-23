@@ -19,7 +19,7 @@ export async function generateMetadata(props: { params: Promise<{ mdxPath?: stri
 
   // Generate dynamic OG image URL from page title
   const ogTitle = metadata?.title || 'YourApp Documentation'
-  const ogImageUrl = `https://example.com/og?title=${encodeURIComponent(ogTitle)}`
+  const ogImageUrl = `https://www.parsedocu.com/og?title=${encodeURIComponent(ogTitle)}`
 
   return {
     ...metadata,
@@ -30,8 +30,8 @@ export async function generateMetadata(props: { params: Promise<{ mdxPath?: stri
     openGraph: {
       title: ogTitle,
       description: metadata?.description || 'Complete API documentation for YourApp PDF generation API.',
-      url: `https://example.com${canonicalPath}`,
-      siteName: 'YourApp',
+      url: `https://www.parsedocu.com${canonicalPath}`,
+      siteName: 'ParseDocu',
       images: [{
         url: ogImageUrl,
         width: 1200,

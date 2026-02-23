@@ -37,7 +37,7 @@ const Hero = () => {
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
             <pre className="text-green-400 overflow-x-auto">
-{`$ curl -X POST https://api.docuprocess.com/v1/convert/pdf-to-markdown \\
+{`$ curl -X POST https://api.parsedocu.com/v1/convert/pdf-to-markdown \\
   -H "x-api-key: sk_live_..." \\
   -H "Content-Type: application/json" \\
   -d '{"url": "https://example.com/document.pdf"}'

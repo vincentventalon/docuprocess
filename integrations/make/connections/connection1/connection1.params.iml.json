@@ -5,6 +5,6 @@
         "label": "API Key",
         "required": true,
         "editable": true,
-        "help": "Find your API key at https://example.com/dashboard/api"
+        "help": "Find your API key at https://www.parsedocu.com/dashboard/api"
     }
 ]

@@ -47,7 +47,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				<Script
 					defer
 					data-website-id="dfid_J3Ru5h78NPRlDpxMxYQ6x"
-					data-domain="example.com"
+					data-domain="parsedocu.com"
 					src="https://datafa.st/js/script.js"
 					strategy="afterInteractive"
 				/>

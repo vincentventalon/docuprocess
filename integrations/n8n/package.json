@@ -8,10 +8,10 @@
 		"yourapp"
 	],
 	"license": "MIT",
-	"homepage": "https://example.com",
+	"homepage": "https://www.parsedocu.com",
 	"author": {
-		"name": "YourOrg",
-		"email": "support@example.com"
+		"name": "ParseDocu",
+		"email": "support@parsedocu.com"
 	},
 	"repository": {
 		"type": "git",

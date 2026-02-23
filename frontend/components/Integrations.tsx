@@ -10,7 +10,7 @@ const Integrations = () => {
           No-code integrations
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
-          Connect your API to popular automation platforms. Integration templates included in the repo.
+          Connect to popular automation platforms and start processing PDFs in minutes.
         </p>
 
         <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-8 sm:gap-x-6 sm:gap-y-14">

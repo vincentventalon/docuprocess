@@ -2,11 +2,12 @@
 
 ## Project Overview
 
-**DocuProcess** - A document processing application built from the starterkit template.
+**ParseDocu** - A PDF to Markdown conversion API built from the starterkit template.
 
 ### Project Status
 
 - **Phase**: Pre-production (Building Stage 1)
+- **Production URL**: https://www.parsedocu.com
 - **Repository**: https://github.com/vincentventalon/docuprocess
 - **Origin**: Cloned from vincentventalon/starterkit
 

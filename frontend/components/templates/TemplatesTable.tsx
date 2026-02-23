@@ -185,7 +185,7 @@ export function TemplatesTable({ templates, apiKey }: TemplatesTableProps) {
   const someSelected = selectedIds.size > 0 && selectedIds.size < templates.length;
 
   // Public API URL for documentation (not the internal backend URL)
-  const publicApiUrl = "https://api.example.com";
+  const publicApiUrl = "https://api.parsedocu.com";
 
   const generateCurlCommand = (template: Template) => {
     const hasData = template.sample_data && Object.keys(template.sample_data).length > 0;

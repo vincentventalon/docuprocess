@@ -10,7 +10,7 @@
  * - Handle empty results gracefully
  */
 
-const API_BASE_URL = 'https://api.example.com';
+const API_BASE_URL = 'https://api.parsedocu.com';
 
 const perform = async (z, bundle) => {
   const response = await z.request({

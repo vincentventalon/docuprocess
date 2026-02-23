@@ -69,7 +69,7 @@ Vérifier:
 
 Perfect for invoices, tickets, shipping labels.
 
-→ example.com/docs/qr-codes
+→ parsedocu.com/docs/qr-codes
 ```
 
 ```
@@ -87,5 +87,5 @@ Pro tip: Use template variables for dynamic content instead of generating HTML e
 
 Faster renders, cleaner code.
 
-Docs → example.com/docs/templates
+Docs → parsedocu.com/docs/templates
 ```

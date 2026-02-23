@@ -5,21 +5,21 @@ import 'nextra-theme-docs/style.css'
 import './docs.css'
 
 export const metadata = {
-  metadataBase: new URL('https://example.com'),
+  metadataBase: new URL('https://www.parsedocu.com'),
   title: {
-    default: 'YourApp Documentation',
-    template: '%s - YourApp Docs'
+    default: 'ParseDocu Documentation',
+    template: '%s - ParseDocu Docs'
   },
-  description: 'Complete API documentation, guides, and code examples for YourApp PDF generation API. Learn about templates, data binding, and integrations.',
+  description: 'Complete API documentation, guides, and code examples for ParseDocu PDF to Markdown API. Learn about conversion, formatting, and integrations.',
   openGraph: {
-    title: 'YourApp Documentation',
-    description: 'Complete API documentation, guides, and code examples for YourApp PDF generation API. Learn about templates, data binding, and integrations.',
-    siteName: 'YourApp',
+    title: 'ParseDocu Documentation',
+    description: 'Complete API documentation, guides, and code examples for ParseDocu PDF to Markdown API. Learn about conversion, formatting, and integrations.',
+    siteName: 'ParseDocu',
     type: 'website',
   },
   twitter: {
-    title: 'YourApp Documentation',
-    description: 'Complete API documentation, guides, and code examples for YourApp PDF generation API. Learn about templates, data binding, and integrations.',
+    title: 'ParseDocu Documentation',
+    description: 'Complete API documentation, guides, and code examples for ParseDocu PDF to Markdown API. Learn about conversion, formatting, and integrations.',
     card: 'summary_large_image' as const,
   },
 }
@@ -28,14 +28,14 @@ const navbar = (
   <Navbar
     logo={
       <span style={{ fontWeight: 700, fontSize: '1.1rem' }}>
-        YourApp
+        ParseDocu
       </span>
     }
-    logoLink="https://example.com"
+    logoLink="https://www.parsedocu.com"
   />
 )
 
-const footer = <Footer>© {new Date().getFullYear()} YourApp. All rights reserved.</Footer>
+const footer = <Footer>© {new Date().getFullYear()} ParseDocu. All rights reserved.</Footer>
 
 export default async function DocsLayout({ children }: { children: ReactNode }) {
   const pageMap = await getPageMap('/docs')

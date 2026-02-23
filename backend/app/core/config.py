@@ -13,10 +13,9 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: List[str] = [
         "http://localhost:3000",
         "http://127.0.0.1:3000",
-        # Add your production domains here:
-        # "https://example.com",
-        # "https://www.example.com",
-        # "https://api.example.com",
+        # Production domains:
+        "https://parsedocu.com",
+        "https://www.parsedocu.com",
     ]
 
     # Server Configuration
