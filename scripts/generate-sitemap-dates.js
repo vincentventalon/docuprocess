@@ -50,7 +50,6 @@ function appPageToUrl(filePath) {
     /^dashboard/,
     /^signin/,
     /^onboarding/,
-    /^sentry-example-page/,
     /^api/,
     /^docs\/\[\[/,
   ];

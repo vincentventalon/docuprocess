@@ -40,9 +40,6 @@ backend/.env
 *.tsbuildinfo
 next-env.d.ts
 
-# Sentry Config File
-.env.sentry-build-plugin
-
 # Generated SDKs (temporary, pushed to separate repos)
 generated/sdks/
 

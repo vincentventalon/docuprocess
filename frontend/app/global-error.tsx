@@ -1,6 +1,5 @@
 "use client";
 
-import * as Sentry from "@sentry/nextjs";
 import NextError from "next/error";
 import { useEffect } from "react";
 
@@ -31,8 +30,8 @@ export default function GlobalError({
         return;
       }
     }
-    // Only report non-hydration errors to Sentry (or hydration errors that persist after retry)
-    Sentry.captureException(error);
+    // Log error to console
+    console.error(error);
   }, [error]);
 
   // Don't show error UI if we're about to auto-retry

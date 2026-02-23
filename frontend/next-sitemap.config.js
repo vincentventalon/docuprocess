@@ -24,7 +24,6 @@ module.exports = {
     "**/twitter-image",
     "**/icon",
     // App pages to exclude
-    "/sentry-example-page",
     "/signin",
     "/dashboard",
     "/dashboard/**",
