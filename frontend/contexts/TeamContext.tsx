@@ -19,7 +19,6 @@ export interface Team {
   has_paid: boolean;
   price_id: string | null;
   customer_id: string | null;
-  settings: Record<string, unknown> | null;
   created_at: string;
 }
 
@@ -89,7 +88,6 @@ export function TeamProvider({ children }: { children: ReactNode }) {
           has_paid,
           price_id,
           customer_id,
-          settings,
           created_at
         )
       `

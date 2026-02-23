@@ -1,5 +1,28 @@
-/* eslint-disable @next/next/no-img-element */
+import Link from "next/link";
 import BadgePill from "@/components/ui/badge-pill";
+
+const integrations = [
+  {
+    name: "n8n",
+    href: "/integrations/n8n",
+    color: "#EA4B71",
+  },
+  {
+    name: "Make",
+    href: "/integrations/make",
+    color: "#6D00CC",
+  },
+  {
+    name: "Zapier",
+    href: "/integrations/zapier",
+    color: "#FF4A00",
+  },
+  {
+    name: "Airtable",
+    href: "/integrations/airtable",
+    color: "#18BFFF",
+  },
+];
 
 const Integrations = () => {
   return (
@@ -9,26 +32,24 @@ const Integrations = () => {
         <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
           No-code integrations
         </h2>
-        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
+        <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
           Connect to popular automation platforms and start processing PDFs in minutes.
         </p>
 
-        <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-8 sm:gap-x-6 sm:gap-y-14">
-          <a href="/integrations/zapier">
-            <img className="h-12 w-44 object-contain" src="/zapierofficial.svg" alt="Zapier integration" loading="lazy" />
-          </a>
-          <a href="/integrations/airtable">
-            <img className="h-12 w-44 object-contain" src="/airtableofficial.svg" alt="Airtable integration" loading="lazy" />
-          </a>
-          <a href="/integrations/make">
-            <img className="h-28 w-44 object-contain" src="/makeofficial.svg" alt="Make integration" loading="lazy" />
-          </a>
-          <a href="/integrations/bubble">
-            <img className="h-36 w-44 object-contain" src="/bubbleofficial.svg" alt="Bubble integration" loading="lazy" />
-          </a>
-          <a href="/integrations/n8n">
-            <img className="h-36 w-44 object-contain" src="/n8nofficial.svg" alt="n8n integration" loading="lazy" />
-          </a>
+        <div className="flex flex-wrap justify-center items-center gap-4">
+          {integrations.map((integration) => (
+            <Link
+              key={integration.name}
+              href={integration.href}
+              className="px-6 py-3 rounded-lg border bg-white hover:shadow-md transition-shadow flex items-center gap-2"
+            >
+              <span
+                className="w-3 h-3 rounded-full"
+                style={{ backgroundColor: integration.color }}
+              />
+              <span className="font-medium text-gray-900">{integration.name}</span>
+            </Link>
+          ))}
         </div>
       </div>
     </section>
