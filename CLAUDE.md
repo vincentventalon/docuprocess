@@ -50,7 +50,8 @@
 ├── scripts/                # Code generation scripts
 │   └── generate.py         # OpenAPI & Postman generator
 ├── .github/workflows/      # CI/CD pipelines
-└── supabase/migrations/    # Database migrations
+├── supabase/migrations/    # Database migrations
+└── knowledge-center/       # Deep-dive docs (Supabase, etc.)
 ```
 
 ## Common Commands
@@ -106,3 +107,9 @@ When adding a new V1 API endpoint:
 1. Create Pydantic models with examples
 2. Document the endpoint with summary/description
 3. Regenerate OpenAPI & Postman: `cd backend && uv run python ../scripts/generate.py`
+
+## Knowledge Center
+
+Deep-dive documentation for specific services lives in `/knowledge-center/`:
+
+- [SUPABASE.md](./knowledge-center/SUPABASE.md) - Database, auth, project config, troubleshooting
