@@ -1,106 +1,74 @@
-import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import BadgePill from "@/components/ui/badge-pill";
 
-const features = [
+const techStack = [
   {
-    number: "1",
-    title: "Use system variables",
-    description: "Access page numbers, total pages, and current date and more automatically with {{sys.page_number}} and friends.",
-    positions: [{ top: "12%", left: "44%" }],
+    name: "Next.js 15",
+    description: "React 19 with App Router, TypeScript, and Tailwind CSS",
+    category: "Frontend",
   },
   {
-    number: "2",
-    title: "Customize every component",
-    description: "Fine-tune content, borders, colors, sizes, positions, and more. Each element has its own properties panel.",
-    positions: [{ top: "18%", left: "90%" }],
+    name: "FastAPI",
+    description: "Python 3.11 with automatic OpenAPI docs and type hints",
+    category: "Backend",
   },
   {
-    number: "3",
-    title: "Built-in functions",
-    description: "Format dates, calculate totals, round numbers, and more. Use 100+ built-in functions or create your own.",
-    positions: [{ top: "79%", left: "40%" }],
+    name: "Supabase",
+    description: "PostgreSQL database, Auth, and Storage",
+    category: "Database",
+  },
+  {
+    name: "Stripe",
+    description: "Subscriptions and usage-based billing",
+    category: "Payments",
+  },
+  {
+    name: "Vercel",
+    description: "Frontend hosting with edge functions",
+    category: "Hosting",
+  },
+  {
+    name: "Cloud Run",
+    description: "Serverless backend deployment",
+    category: "Hosting",
   },
 ];
 
-const NumberBadge = ({
-  number,
-  className = "",
-}: {
-  number: string;
-  className?: string;
-}) => (
-  <span
-    className={`inline-flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 text-primary text-xs font-bold border border-slate-200 dark:border-slate-700 ${className}`}
-  >
-    {number}
-  </span>
-);
-
 const FeatureShowcase2 = () => {
   return (
-    <section className="w-full py-12 lg:py-16 overflow-hidden">
-      <div className="max-w-[90rem] mx-auto pl-6 lg:pl-8 pr-6 lg:pr-0">
-        <div className="lg:pl-20">
-          <BadgePill>Easy to use</BadgePill>
+    <section className="w-full py-12 lg:py-16 overflow-hidden bg-slate-50 dark:bg-slate-900">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <BadgePill>Modern stack</BadgePill>
+          <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
+            Built with the best tools
+          </h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Production-ready tech stack that scales. No vendor lock-in, full source code access.
+          </p>
         </div>
-        <div className="flex flex-col-reverse lg:flex-row items-start gap-12 lg:gap-24">
-          {/* Text content */}
-          <div className="w-full lg:w-2/5 lg:pl-20">
-            <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
-              Documents that adapt to your data
-            </h2>
-            <p className="text-lg text-muted-foreground mb-10">
-              Go beyond simple placeholders. Use expressions to format, calculate, and control your content.
-            </p>
 
-            <div className="space-y-6">
-              {features.map((feature) => (
-                <div key={feature.number}>
-                  <div className="flex items-center gap-3 mb-2">
-                    <NumberBadge number={feature.number} className="flex-shrink-0" />
-                    <h3 className="font-semibold text-lg">{feature.title}</h3>
-                  </div>
-                  <p className="text-muted-foreground">{feature.description}</p>
-                </div>
-              ))}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+          {techStack.map((tech) => (
+            <div
+              key={tech.name}
+              className="p-6 rounded-xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700"
+            >
+              <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                {tech.category}
+              </span>
+              <h3 className="font-semibold text-lg mt-2 mb-1">{tech.name}</h3>
+              <p className="text-sm text-muted-foreground">{tech.description}</p>
             </div>
+          ))}
+        </div>
 
-            <div className="mt-10 flex items-center gap-4">
-              <Button asChild size="lg">
-                <Link href="/signin">Start building</Link>
-              </Button>
-              <p className="text-sm text-muted-foreground">No credit card required</p>
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className="w-full lg:w-1/2">
-            <div className="relative aspect-[16/10] rounded-xl overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-700">
-              <Image
-                src="/section2.png"
-                alt="Template editor with expressions"
-                fill
-                className="object-contain"
-                sizes="(max-width: 768px) 100vw, 60vw"
-              />
-              {/* Numbered markers */}
-              {features.flatMap((feature) =>
-                feature.positions.map((pos, idx) => (
-                  <div
-                    key={`${feature.number}-${idx}`}
-                    className="absolute transform -translate-x-1/2 -translate-y-1/2 z-10"
-                    style={{ top: pos.top, left: pos.left }}
-                  >
-                    <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-100 dark:bg-slate-800 text-primary text-xs font-bold border border-slate-200 dark:border-slate-700">
-                      {feature.number}
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+        <div className="mt-12 text-center">
+          <Button asChild size="lg">
+            <Link href="/signin">Start building</Link>
+          </Button>
+          <p className="text-sm text-muted-foreground mt-3">No credit card required</p>
         </div>
       </div>
     </section>

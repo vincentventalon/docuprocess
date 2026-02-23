@@ -24,15 +24,15 @@ const CTA = () => {
                 {/* Text content */}
                 <div className="max-w-xl">
                   <h2 className="font-bold text-3xl md:text-4xl tracking-tight text-slate-900 mb-4">
-                    Automate your PDF generation
+                    Ship your API product faster
                   </h2>
                   <p className="text-lg text-slate-600 mb-8">
-                    Complete documentation, no-code integrations, and a powerful API to help you generate PDFs at scale. Let us handle the boring stuff.
+                    Complete documentation, production-ready infrastructure, and a modern tech stack. Focus on your product, not boilerplate.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Button asChild size="lg">
                       <Link href="/signin">
-                        Start generating
+                        Get started
                         <span className="ml-2">→</span>
                       </Link>
                     </Button>

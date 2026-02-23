@@ -85,13 +85,11 @@ const PricingClient = () => {
 
                   <ul className="space-y-3 leading-relaxed text-sm flex-1 text-left">
                     {[
-                      `${config.stripe.freeTier.credits} PDFs/month`,
-                      `${config.stripe.freeTier.templates} Templates`,
+                      `${config.stripe.freeTier.credits.toLocaleString()} API requests/month`,
+                      `${config.stripe.freeTier.apiKeys} API key`,
                       config.stripe.freeTier.rateLimit,
-                      "Pay only for successful requests",
-                      "Bring your own storage",
-                      "Zapier, Make, Bubble, n8n, etc.",
-                      "REST API",
+                      "Community support",
+                      "REST API access",
                     ].map((feature, i) => (
                       <li key={i} className="flex items-center gap-3">
                         <div className="w-5 h-5 rounded-full bg-white border border-primary flex items-center justify-center shrink-0">

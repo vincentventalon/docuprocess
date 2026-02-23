@@ -4,32 +4,30 @@ import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import FeatureShowcase from '@/components/FeatureShowcase';
 import FeatureShowcase2 from '@/components/FeatureShowcase2';
-import TemplateShowcase from '@/components/TemplateShowcase';
 import Integrations from '@/components/Integrations';
 import { getSEOTags, renderSchemaTags, renderWebSiteSchema } from "@/libs/seo";
 import config from "@/config";
 
 export const metadata = getSEOTags({
-  title: `Free PDF Generator & API for Developers | ${config.appName}`,
+  title: `API Starter Kit | FastAPI + Next.js + Supabase | ${config.appName}`,
   description:
-    "Design PDF templates with our visual drag-and-drop editor, then generate thousands via API. Free invoice, certificate, and label generators. No coding required. Start free with 100 PDFs/month.",
+    "Ship your API product faster with this production-ready SaaS starter kit. FastAPI backend, Next.js frontend, Supabase auth & database, Stripe payments, and team management included.",
   keywords: [
-    "free PDF generator",
-    "PDF API",
-    "PDF template editor",
-    "PDF generation API",
-    "invoice generator",
-    "certificate maker",
-    "no-code PDF tool",
-    "document automation",
-    "visual PDF designer",
+    "API starter kit",
+    "FastAPI template",
+    "SaaS boilerplate",
+    "Next.js starter",
+    "Supabase template",
+    "API-first SaaS",
+    "developer tools",
+    "API development",
     config.appName,
   ],
   canonicalUrlRelative: "/",
   openGraph: {
-    title: `Free PDF Generator & API for Developers | ${config.appName}`,
+    title: `API Starter Kit | FastAPI + Next.js + Supabase | ${config.appName}`,
     description:
-      "Design PDF templates visually, generate thousands via API. Free invoice, certificate, and label generators included.",
+      "Ship your API product faster with this production-ready SaaS starter kit. Auth, payments, teams, and database included.",
     url: `https://${config.domainName}/`,
   },
 });
@@ -47,7 +45,6 @@ export default function Home() {
         <FeatureShowcase />
         <FeatureShowcase2 />
         <Integrations />
-        <TemplateShowcase />
       </main>
       <Footer />
     </>

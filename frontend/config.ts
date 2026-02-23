@@ -2,10 +2,10 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "MyApp",
+  appName: "Starterkit",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "Your app description here. Describe what your app does for SEO.",
+    "API-first SaaS starter kit with FastAPI, Next.js, and Supabase. Ship your API product faster.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "example.com",
   // crisp: {
@@ -19,17 +19,17 @@ const config = {
     // Free tier configuration - all new users start here
     freeTier: {
       name: "Free",
-      credits: 100,
-      templates: 10,
+      credits: 1000,
+      apiKeys: 1,
       rateLimit: "60 requests/min",
       features: [
-        "100 PDFs/month",
-        "10 Templates",
+        "1,000 API requests/month",
+        "1 API key",
         "Community support",
       ],
     },
     // Credits given to new users on signup (matches freeTier.credits)
-    freeCreditsOnSignup: 100,
+    freeCreditsOnSignup: 1000,
     plans: [
       {
         name: "Starter",
@@ -49,16 +49,16 @@ const config = {
         yearlyPrice: 180,
         yearlyPriceAnchor: 348,
         // Plan limits
-        credits: 1000,
-        templates: 15,
+        credits: 10000,
+        apiKeys: 5,
         features: [
-          { name: "1000 PDFs" },
-          { name: "15 Templates" },
+          { name: "10,000 API requests" },
+          { name: "5 API keys" },
           { name: "30 requests per minute" },
-          { name: "Pay only for successful requests" },
-          { name: "Bring your own storage" },
-          { name: "Zapier, Make, Bubble, n8n, etc." },
-          { name: "REST API" },
+          { name: "Team collaboration" },
+          { name: "Zapier, Make, n8n integrations" },
+          { name: "Email support" },
+          { name: "REST API access" },
         ],
       },
       {
@@ -80,16 +80,16 @@ const config = {
         yearlyPrice: 390,
         yearlyPriceAnchor: 588,
         // Plan limits
-        credits: 5000,
-        templates: 40,
+        credits: 100000,
+        apiKeys: 20,
         features: [
-          { name: "5000 PDFs" },
-          { name: "40 Templates" },
-          { name: "100 request per minute" },
-          { name: "Pay only for successful requests" },
-          { name: "Bring your own storage" },
-          { name: "Zapier, Make, Bubble, n8n, etc." },
-          { name: "REST API" },
+          { name: "100,000 API requests" },
+          { name: "20 API keys" },
+          { name: "100 requests per minute" },
+          { name: "Team collaboration" },
+          { name: "Zapier, Make, n8n integrations" },
+          { name: "Priority support" },
+          { name: "REST API access" },
         ],
       },
     ],

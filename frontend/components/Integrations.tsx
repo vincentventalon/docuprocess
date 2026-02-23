@@ -10,24 +10,24 @@ const Integrations = () => {
           No-code integrations
         </h2>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-4">
-          Generate PDFs automatically with Zapier, Airtable, Make and other popular no-code platforms of your choice.
+          Connect your API to popular automation platforms. Integration templates included in the repo.
         </p>
 
         <div className="flex flex-wrap justify-center items-center gap-x-2 gap-y-8 sm:gap-x-6 sm:gap-y-14">
-          <a href="/integrations/generate-pdf-with-zapier">
-            <img className="h-12 w-44 object-contain" src="/zapierofficial.svg" alt="Automate PDFs in Zapier" loading="lazy" />
+          <a href="/integrations/zapier">
+            <img className="h-12 w-44 object-contain" src="/zapierofficial.svg" alt="Zapier integration" loading="lazy" />
           </a>
-          <a href="/integrations/generate-pdf-with-airtable">
-            <img className="h-12 w-44 object-contain" src="/airtableofficial.svg" alt="Automate PDFs in Airtable" loading="lazy" />
+          <a href="/integrations/airtable">
+            <img className="h-12 w-44 object-contain" src="/airtableofficial.svg" alt="Airtable integration" loading="lazy" />
           </a>
-          <a href="/integrations/generate-pdf-with-make">
-            <img className="h-28 w-44 object-contain" src="/makeofficial.svg" alt="Automate PDFs in Make" loading="lazy" />
+          <a href="/integrations/make">
+            <img className="h-28 w-44 object-contain" src="/makeofficial.svg" alt="Make integration" loading="lazy" />
           </a>
-          <a href="/integrations/generate-pdf-with-bubble">
-            <img className="h-36 w-44 object-contain" src="/bubbleofficial.svg" alt="Automate PDFs in Bubble" loading="lazy" />
+          <a href="/integrations/bubble">
+            <img className="h-36 w-44 object-contain" src="/bubbleofficial.svg" alt="Bubble integration" loading="lazy" />
           </a>
-          <a href="/integrations/generate-pdf-with-n8n">
-            <img className="h-36 w-44 object-contain" src="/n8nofficial.svg" alt="Automate PDFs in n8n" loading="lazy" />
+          <a href="/integrations/n8n">
+            <img className="h-36 w-44 object-contain" src="/n8nofficial.svg" alt="n8n integration" loading="lazy" />
           </a>
         </div>
       </div>

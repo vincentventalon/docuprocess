@@ -25,7 +25,7 @@ export type Theme =
 export interface FreeTier {
   name: string;
   credits: number;
-  templates: number;
+  apiKeys: number;
   rateLimit: string;
   features: string[];
 }
@@ -56,7 +56,7 @@ export interface ConfigProps {
       yearlyPriceAnchor?: number;
       // Plan limits
       credits?: number;
-      templates?: number;
+      apiKeys?: number;
       features: {
         name: string;
       }[];
