@@ -11,9 +11,21 @@
 
 const fs = require("fs");
 const path = require("path");
+const { fileURLToPath } = require("url");
+
+// ES module compatible __dirname
+const getDirname = () => {
+  try {
+    // Try ES module approach first
+    return path.dirname(fileURLToPath(import.meta.url));
+  } catch {
+    // Fallback to process.cwd() for edge runtime
+    return process.cwd();
+  }
+};
 
 // Pre-generated dates from git history (created by scripts/generate-sitemap-dates.js)
-const DATES_FILE = path.join(__dirname, "../generated/sitemap-dates.json");
+const DATES_FILE = path.join(process.cwd(), "generated/sitemap-dates.json");
 
 // Cache for static page dates (loaded once from JSON)
 let staticDatesCache = null;
