@@ -2,7 +2,13 @@
 
 ## Project Overview
 
-**Starterkit** - A SaaS starter kit with Next.js frontend and FastAPI backend.
+**DocuProcess** - A document processing application built from the starterkit template.
+
+### Project Status
+
+- **Phase**: Initial Setup
+- **Repository**: https://github.com/vincentventalon/docuprocess
+- **Origin**: Cloned from vincentventalon/starterkit
 
 ## Tech Stack
 
@@ -108,8 +114,34 @@ When adding a new V1 API endpoint:
 2. Document the endpoint with summary/description
 3. Regenerate OpenAPI & Postman: `cd backend && uv run python ../scripts/generate.py`
 
+## Known Issues & Gotchas
+
+### Edge Functions & Path Aliases
+
+**Problem**: Next.js middleware (Edge Functions) cannot use `@/` path aliases on Vercel.
+
+**Error**: `The Edge Function "middleware" is referencing unsupported modules: @/libs/...`
+
+**Solution**: Use relative imports in `middleware.ts`:
+```typescript
+// ❌ Wrong
+import { updateSession } from "@/libs/supabase/middleware";
+
+// ✅ Correct
+import { updateSession } from "./libs/supabase/middleware";
+```
+
+### Supabase Region Convention
+
+Always create Supabase projects in **US regions** (us-east-1 preferred) for consistency with Vercel deployment.
+
+### Vercel Root Directory
+
+For monorepo deployments, ensure Vercel's root directory is set to `frontend/` in project settings.
+
 ## Knowledge Center
 
 Deep-dive documentation for specific services lives in `/knowledge-center/`:
 
+- [INIT_PROJECT.md](./knowledge-center/INIT_PROJECT.md) - Project initialization guide and checklist
 - [SUPABASE.md](./knowledge-center/SUPABASE.md) - Database, auth, project config, troubleshooting

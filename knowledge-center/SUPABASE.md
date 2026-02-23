@@ -4,10 +4,15 @@
 
 | Key | Value |
 |-----|-------|
-| Project URL | https://whcmfrkmvpamvaxugbtz.supabase.co |
-| Project Name | starterkit |
-| Region | (check dashboard) |
+| Project URL | https://jlinuyvbqnhgkrhghosq.supabase.co |
+| Project Ref | jlinuyvbqnhgkrhghosq |
+| Project Name | docuprocess |
+| Organization | Docuprocess |
+| Region | us-east-1 (North Virginia) |
 | Plan | Free tier |
+| Dashboard | https://supabase.com/dashboard/project/jlinuyvbqnhgkrhghosq |
+
+> **Convention**: Always create Supabase projects in **US regions** (us-east-1 preferred) for consistency with Vercel deployment.
 
 ## Free Tier Limitations
 
@@ -75,19 +80,19 @@ supabase gen types typescript --local > frontend/types/supabase.ts
 ### Frontend (.env.local)
 
 ```env
-NEXT_PUBLIC_SUPABASE_URL=https://whcmfrkmvpamvaxugbtz.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=<anon-key>
-SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+NEXT_PUBLIC_SUPABASE_URL=https://jlinuyvbqnhgkrhghosq.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpsaW51eXZicW5oZ2tyaGdob3NxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE4NjI0MDQsImV4cCI6MjA4NzQzODQwNH0.EVYVGYWnP57TOOLQx5nsZefELnG1h4T8ANqb7JE90Ug
+SUPABASE_SERVICE_ROLE_KEY=<get from dashboard - never commit>
 ```
 
 ### Backend (.env)
 
 ```env
-SUPABASE_URL=https://whcmfrkmvpamvaxugbtz.supabase.co
-SUPABASE_SERVICE_ROLE_KEY=<service-role-key>
+SUPABASE_URL=https://jlinuyvbqnhgkrhghosq.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=<get from dashboard - never commit>
 ```
 
-Find keys at: https://supabase.com/dashboard/project/whcmfrkmvpamvaxugbtz/settings/api
+Find keys at: https://supabase.com/dashboard/project/jlinuyvbqnhgkrhghosq/settings/api
 
 ## Database Schema
 
