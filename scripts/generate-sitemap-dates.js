@@ -10,11 +10,31 @@
  */
 
 const { execSync } = require("child_process");
-const fg = require("fast-glob");
 const fs = require("fs");
 const path = require("path");
 
 const OUTPUT_FILE = path.join(__dirname, "../generated/sitemap-dates.json");
+
+/**
+ * Recursively find files matching a pattern
+ */
+function findFiles(dir, pattern, results = []) {
+  if (!fs.existsSync(dir)) return results;
+
+  const files = fs.readdirSync(dir, { withFileTypes: true });
+  for (const file of files) {
+    const fullPath = path.join(dir, file.name);
+    if (file.isDirectory()) {
+      // Skip node_modules and .next
+      if (file.name !== "node_modules" && file.name !== ".next") {
+        findFiles(fullPath, pattern, results);
+      }
+    } else if (pattern.test(file.name)) {
+      results.push(fullPath);
+    }
+  }
+  return results;
+}
 
 /**
  * Get git last modified date for a file
@@ -37,7 +57,7 @@ function getGitDate(filePath) {
  */
 function appPageToUrl(filePath) {
   let urlPath = filePath
-    .replace(/^frontend\/app\//, "")
+    .replace(/^.*frontend\/app\//, "")
     .replace(/\/?page\.tsx$/, "");
 
   // Handle route groups like (docs)
@@ -68,7 +88,7 @@ function appPageToUrl(filePath) {
  */
 function mdxToUrl(filePath) {
   let urlPath = filePath
-    .replace(/^frontend\/content\//, "")
+    .replace(/^.*frontend\/content\//, "")
     .replace(/\.mdx$/, "");
 
   if (urlPath.endsWith("_meta") || urlPath.includes("_meta.")) {
@@ -87,8 +107,11 @@ function main() {
   const dates = {};
   let count = 0;
 
+  const rootDir = path.join(__dirname, "..");
+
   // Discover and process app pages
-  const appPages = fg.sync("frontend/app/**/page.tsx", { cwd: process.cwd() });
+  const appDir = path.join(rootDir, "frontend/app");
+  const appPages = findFiles(appDir, /^page\.tsx$/);
   for (const filePath of appPages) {
     const url = appPageToUrl(filePath);
     if (url) {
@@ -101,7 +124,8 @@ function main() {
   }
 
   // Discover and process MDX docs
-  const mdxDocs = fg.sync("frontend/content/**/*.mdx", { cwd: process.cwd() });
+  const contentDir = path.join(rootDir, "frontend/content");
+  const mdxDocs = findFiles(contentDir, /\.mdx$/);
   for (const filePath of mdxDocs) {
     const url = mdxToUrl(filePath);
     if (url) {
