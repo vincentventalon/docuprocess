@@ -2,7 +2,6 @@
 
 import { useRef, useState } from "react";
 import type { JSX } from "react";
-import config from "@/config";
 
 interface FAQItemProps {
   question: string;
@@ -11,78 +10,95 @@ interface FAQItemProps {
 
 const faqList: FAQItemProps[] = [
   {
-    question: "What is PDF Template API?",
+    question: "What is this starter kit?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>A simple API to generate PDFs from templates. Design your template once with our visual editor, then generate thousands of PDFs by sending data via API.</p>
-        <p>Perfect for invoices, certificates, reports, shipping labels, and any document you need to automate.</p>
+        <p>A production-ready SaaS starter kit for building API-first products. It includes authentication, team management, Stripe payments, and a FastAPI backend.</p>
+        <p>Perfect for developers who want to ship their API product faster without rebuilding common infrastructure.</p>
       </div>
     ),
   },
   {
-    question: "Do I need to know how to code?",
+    question: "What tech stack is included?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>To design templates: No. Our visual drag-and-drop editor requires no coding skills.</p>
-        <p>To generate PDFs: Basic API knowledge helps, but we provide copy-paste examples for cURL, Python, Node.js, and PHP.</p>
-      </div>
-    ),
-  },
-  {
-    question: "How does it work?",
-    answer: (
-      <div className="space-y-2 leading-relaxed">
-        <p>Three simple steps:</p>
+        <p>The stack includes:</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>Design your template with our visual editor</li>
-          <li>Add dynamic variables (like {"{{customer_name}}"})</li>
-          <li>Call our API with your data to generate PDFs</li>
+          <li>Frontend: Next.js 15, React 19, TypeScript, Tailwind CSS</li>
+          <li>Backend: FastAPI (Python 3.11)</li>
+          <li>Database: PostgreSQL via Supabase</li>
+          <li>Auth: Supabase Auth with JWT + API keys</li>
+          <li>Payments: Stripe subscriptions</li>
         </ul>
       </div>
     ),
   },
   {
-    question: "How fast is PDF generation?",
+    question: "How does team management work?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>Most PDFs generate in 1–3 seconds. Speed depends on template complexity and number of pages.</p>
-      </div>
-    ),
-  },
-  {
-    question: "What output formats are available?",
-    answer: (
-      <div className="space-y-2 leading-relaxed">
-        <p>You can get your PDF as:</p>
+        <p>The starter kit uses a team-based multi-tenancy model:</p>
         <ul className="list-disc list-inside space-y-1">
-          <li>A signed URL (link expires after a set time)</li>
-          <li>Binary data (direct download)</li>
+          <li>Users can create and join multiple teams</li>
+          <li>Role-based permissions (owner, admin, member)</li>
+          <li>Team invitations via email</li>
+          <li>All resources belong to teams, not individual users</li>
         </ul>
       </div>
     ),
   },
   {
-    question: "Do you store my PDFs?",
+    question: "How do API keys work?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>PDFs are temporarily stored and accessible via signed URL (you choose the expiration time: 1 minute to 7 days).</p>
-        <p>After expiration, they are automatically deleted.</p>
+        <p>Each team can create multiple API keys for programmatic access. Keys are scoped to the team and can be revoked at any time.</p>
+        <p>The backend validates both JWT tokens (for user sessions) and API keys (for programmatic access).</p>
       </div>
     ),
   },
   {
-    question: "Is there a free plan?",
+    question: "How is hosting configured?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>Yes! You get {config.stripe.freeTier.credits} free PDFs at signup. No credit card required to start.</p>
+        <p>The starter kit is configured for:</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Frontend: Vercel (with edge functions)</li>
+          <li>Backend: Google Cloud Run (serverless containers)</li>
+          <li>Database: Supabase (managed PostgreSQL)</li>
+        </ul>
+        <p>Deploy scripts and CI/CD workflows are included.</p>
       </div>
     ),
   },
   {
-    question: "Can I bring my own storage?",
+    question: "What integrations are included?",
     answer: (
       <div className="space-y-2 leading-relaxed">
-        <p>Yes! You can connect your own S3-compatible storage (AWS S3, Cloudflare R2, etc.) and we&apos;ll upload generated PDFs directly there.</p>
+        <p>The repo includes integration templates for:</p>
+        <ul className="list-disc list-inside space-y-1">
+          <li>Zapier (custom integration)</li>
+          <li>Make (custom app)</li>
+          <li>n8n (community node)</li>
+        </ul>
+        <p>These let your users connect your API to automation platforms.</p>
+      </div>
+    ),
+  },
+  {
+    question: "Do I get full source code access?",
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        <p>Yes! You get complete access to all source code. No vendor lock-in, no runtime dependencies on our platform.</p>
+        <p>Fork the repo, customize everything, and deploy to your own infrastructure.</p>
+      </div>
+    ),
+  },
+  {
+    question: "How do I add my own API endpoints?",
+    answer: (
+      <div className="space-y-2 leading-relaxed">
+        <p>Add new endpoints in the FastAPI backend under <code className="bg-muted px-1 rounded">backend/app/routers/v1/</code>.</p>
+        <p>The OpenAPI schema and Postman collection are auto-generated from your endpoint definitions.</p>
       </div>
     ),
   },
@@ -144,7 +160,7 @@ const FAQ = () => {
             Frequently Asked Questions
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Answers to common questions about our PDF generation API for developers and businesses.
+            Answers to common questions about the API starter kit.
           </p>
         </div>
 

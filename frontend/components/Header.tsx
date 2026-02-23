@@ -37,10 +37,6 @@ const links: {
     label: "Documentation",
   },
   {
-    href: "/templates",
-    label: "Templates",
-  },
-  {
     href: "/pricing",
     label: "Pricing",
   },
