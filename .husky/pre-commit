@@ -1,0 +1,36 @@
+# Fix PATH for GUI apps (VSCode, Cursor, etc.) - load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+# Run lint-staged from frontend
+(cd frontend && npx lint-staged)
+
+# Regenerate sitemap dates from git history
+node scripts/generate-sitemap-dates.js > /dev/null
+if ! git diff --quiet generated/sitemap-dates.json; then
+  git add generated/sitemap-dates.json
+  echo "✓ Sitemap dates updated and staged"
+fi
+
+# Fetch tags to ensure setuptools-scm has correct version
+git fetch --tags --quiet 2>/dev/null || true
+
+# Generate OpenAPI schema & Postman collection, fail if changed
+(cd backend && DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH" .venv/bin/python ../scripts/generate.py)
+if ! git diff --quiet generated/openapi.json generated/postman/YourApp_API.postman_collection.json; then
+  echo "❌ API schema files were out of date (now updated). Stage and commit again:"
+  echo "   git add generated/openapi.json generated/postman/YourApp_API.postman_collection.json"
+  exit 1
+fi
+
+# Check: if openapi.json is staged, warn if commit is not feat: or fix:
+if git diff --cached --name-only | grep -q "generated/openapi.json"; then
+  echo ""
+  echo "Note: openapi.json is staged. For SDK auto-publishing, use:"
+  echo "  - feat(api): for new API features (minor version bump)"
+  echo "  - fix(api): for API bug fixes (patch version bump)"
+  echo ""
+fi
+
+# Run backend tests (excluding E2E tests)
+(cd backend && DYLD_LIBRARY_PATH="/opt/homebrew/lib:$DYLD_LIBRARY_PATH" .venv/bin/python -m pytest tests/ -v --ignore=tests/e2e)

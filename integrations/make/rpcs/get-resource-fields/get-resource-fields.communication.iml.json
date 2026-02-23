@@ -1,0 +1,15 @@
+{
+    "url": "/v1/resources/{{parameters.resource_id}}/fields",
+    "method": "GET",
+    "response": {
+        "iterate": "{{body}}",
+        "output": {
+            "name": "{{item.key}}",
+            "label": "{{item.label}}",
+            "type": "{{if(item.type == 'string', 'text', item.type)}}",
+            "required": "{{item.required}}",
+            "help": "{{item.helpText}}",
+            "spec": "{{item.spec}}"
+        }
+    }
+}

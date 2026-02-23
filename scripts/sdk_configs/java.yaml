@@ -1,0 +1,38 @@
+# OpenAPI Generator configuration for Java SDK
+# Generator: java (native HTTP client)
+
+generatorName: java
+outputDir: ../generated/sdks/java
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: javasdk
+
+additionalProperties:
+  groupId: io.github.yourapppdf
+  artifactId: sdk
+  artifactVersion: "1.0.0"
+  artifactUrl: https://github.com/YourOrg/javasdk
+  artifactDescription: "Official YourApp Java SDK - Generate PDFs from HTML templates"
+  apiPackage: com.yourapp.sdk.api
+  modelPackage: com.yourapp.sdk.model
+  invokerPackage: com.yourapp.sdk
+  library: native
+  java8: true
+  dateLibrary: java8
+  serializationLibrary: jackson
+  hideGenerationTimestamp: true
+  useJakartaEe: true
+  developerName: YourApp
+  developerEmail: support@example.com
+  developerOrganization: YourApp
+  developerOrganizationUrl: https://example.com
+  scmConnection: scm:git:git@github.com:YourOrg/javasdk.git
+  scmDeveloperConnection: scm:git:git@github.com:YourOrg/javasdk.git
+  scmUrl: https://github.com/YourOrg/javasdk
+  licenseName: MIT
+  licenseUrl: https://opensource.org/licenses/MIT
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

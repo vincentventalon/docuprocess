@@ -1,0 +1,18 @@
+import { ReactNode } from "react";
+import config from "@/config";
+import { getSEOTags } from "@/libs/seo";
+
+export const metadata = getSEOTags({
+  title: `Sign-in to ${config.appName}`,
+  canonicalUrlRelative: "/signin",
+  extraTags: {
+    robots: {
+      index: false,
+      follow: true,
+    },
+  },
+});
+
+export default function Layout({ children }: { children: ReactNode }) {
+  return <>{children}</>;
+}

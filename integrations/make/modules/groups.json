@@ -1,0 +1,14 @@
+[
+    {
+        "label": "Resources",
+        "modules": [
+            "CreateResource"
+        ]
+    },
+    {
+        "label": "Other",
+        "modules": [
+            "universalmoduleapi"
+        ]
+    }
+]

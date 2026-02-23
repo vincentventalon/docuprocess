@@ -1,0 +1,27 @@
+# OpenAPI Generator configuration for C# SDK
+# Generator: csharp
+
+generatorName: csharp
+outputDir: ../generated/sdks/csharp
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: csharpsdk
+
+additionalProperties:
+  packageName: YourApp.SDK
+  packageVersion: "1.0.0"
+  packageTitle: "YourApp SDK"
+  packageAuthors: "YourApp"
+  packageCompany: "YourApp"
+  packageDescription: "Official YourApp .NET SDK - Generate PDFs from HTML templates via API"
+  packageTags: "pdf,template,api,generation"
+  targetFramework: netstandard2.0
+  nullableReferenceTypes: true
+  library: httpclient
+  netCoreProjectFile: true
+  licenseId: MIT
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

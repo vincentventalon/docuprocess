@@ -1,0 +1,24 @@
+# OpenAPI Generator configuration for Ruby SDK
+# Generator: ruby
+
+generatorName: ruby
+outputDir: ../generated/sdks/ruby
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: rubysdk
+
+additionalProperties:
+  gemName: yourapp
+  gemVersion: "1.0.0"
+  gemAuthor: YourApp
+  gemAuthorEmail: support@example.com
+  gemHomepage: "https://github.com/YourOrg/rubysdk"
+  gemSummary: "Official YourApp Ruby SDK"
+  gemDescription: "Ruby SDK for YourApp - Generate PDFs from HTML templates via API"
+  gemLicense: MIT
+  moduleName: YourApp
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

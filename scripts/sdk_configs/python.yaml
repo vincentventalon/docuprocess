@@ -1,0 +1,27 @@
+# OpenAPI Generator configuration for Python SDK
+# Generator: python
+
+generatorName: python
+outputDir: ../generated/sdks/python
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: pythonsdk
+
+additionalProperties:
+  packageName: yourapp
+  projectName: yourapp
+  packageVersion: "1.0.0"
+  packageUrl: "https://github.com/YourOrg/pythonsdk"
+  generateSourceCodeOnly: false
+  useNose: false
+  infoName: YourApp
+  infoEmail: support@example.com
+
+# Map request bodies to individual parameters
+inlineSchemaOptions:
+  RESOLVE_INLINE_ENUMS: true
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

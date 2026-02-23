@@ -1,0 +1,232 @@
+name: SDK Publish
+
+on:
+  workflow_run:
+    workflows: ["CI/CD"]
+    types: [completed]
+    branches: [master]
+
+  workflow_dispatch:
+    inputs:
+      force:
+        description: 'Force publish even if no API changes detected'
+        type: boolean
+        default: false
+      skip_release:
+        description: 'Skip creating releases (just push code)'
+        type: boolean
+        default: false
+
+jobs:
+  check-and-tag:
+    name: Check Changes & Create Tag
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    outputs:
+      should_publish: ${{ steps.analyze.outputs.should_publish }}
+      new_version: ${{ steps.analyze.outputs.new_version }}
+      new_tag: ${{ steps.analyze.outputs.new_tag }}
+      bump_type: ${{ steps.analyze.outputs.bump_type }}
+      current_tag: ${{ steps.analyze.outputs.current_tag }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.SDK_PUBLISH_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Analyze commits and determine version bump
+        id: analyze
+        run: |
+          python scripts/bump_version.py --check-only > result.json
+          cat result.json
+          echo "should_publish=$(jq -r '.should_publish' result.json)" >> $GITHUB_OUTPUT
+          echo "new_version=$(jq -r '.new_version' result.json)" >> $GITHUB_OUTPUT
+          echo "new_tag=$(jq -r '.new_tag' result.json)" >> $GITHUB_OUTPUT
+          echo "bump_type=$(jq -r '.bump_type' result.json)" >> $GITHUB_OUTPUT
+          echo "current_tag=$(jq -r '.current_tag' result.json)" >> $GITHUB_OUTPUT
+
+      - name: Create and push version tag
+        if: steps.analyze.outputs.should_publish == 'true' || github.event.inputs.force == 'true'
+        run: |
+          NEW_TAG="${{ steps.analyze.outputs.new_tag }}"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # Check if tag already exists
+          if git rev-parse "$NEW_TAG" >/dev/null 2>&1; then
+            echo "Tag $NEW_TAG already exists, skipping tag creation"
+          else
+            git tag -a "$NEW_TAG" -m "Release $NEW_TAG"
+            git push origin "$NEW_TAG"
+            echo "Created and pushed tag: $NEW_TAG"
+          fi
+
+
+  publish-sdks:
+    name: Generate & Publish SDKs
+    needs: check-and-tag
+    if: needs.check-and-tag.outputs.should_publish == 'true' || github.event.inputs.force == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code at new tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.check-and-tag.outputs.new_tag }}
+          fetch-depth: 0
+          token: ${{ secrets.SDK_PUBLISH_TOKEN }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: uv sync
+
+      - name: Verify version from tag
+        working-directory: ./backend
+        run: |
+          # Install package in dev mode to get version from setuptools-scm
+          uv pip install -e .
+          VERSION=$(uv run python -c "from importlib.metadata import version; print(version('pdftemplatefast-backend'))")
+          echo "Version from setuptools-scm: $VERSION"
+
+          # Verify it matches expected version (clean, no .dev suffix)
+          EXPECTED="${{ needs.check-and-tag.outputs.new_version }}"
+          if [ "$VERSION" != "$EXPECTED" ]; then
+            echo "ERROR: Version mismatch! Got $VERSION, expected $EXPECTED"
+            exit 1
+          fi
+          echo "Version verified: $VERSION"
+
+      - name: Install OpenAPI Generator CLI
+        run: npm install -g @openapitools/openapi-generator-cli
+
+      - name: Regenerate OpenAPI spec
+        working-directory: ./backend
+        run: uv run python ../scripts/generate.py
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "placeholder"
+          NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET: "placeholder"
+
+      - name: Generate SDKs
+        working-directory: ./backend
+        run: uv run python ../scripts/generate_sdks.py --no-validate
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://placeholder.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "placeholder"
+          NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET: "placeholder"
+
+      - name: Configure git identity
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Publish SDKs to GitHub repos
+        working-directory: ./backend
+        run: uv run python ../scripts/publish_sdks.py
+        env:
+          GH_TOKEN: ${{ secrets.SDK_PUBLISH_TOKEN }}
+
+      - name: Generate release notes
+        if: github.event.inputs.skip_release != 'true'
+        working-directory: ./backend
+        run: |
+          uv run python ../scripts/generate_release_notes.py \
+            --from-tag "${{ needs.check-and-tag.outputs.current_tag }}" \
+            --to-tag "${{ needs.check-and-tag.outputs.new_tag }}" \
+            --output ../release_notes.md || true
+          if [ -f ../release_notes.md ]; then
+            echo "Release notes generated:"
+            cat ../release_notes.md
+          else
+            echo "No release notes generated, will use default"
+          fi
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+      - name: Create releases
+        if: github.event.inputs.skip_release != 'true'
+        working-directory: ./backend
+        run: |
+          if [ -f ../release_notes.md ]; then
+            uv run python ../scripts/create_sdk_releases.py --notes-file ../release_notes.md
+          else
+            uv run python ../scripts/create_sdk_releases.py
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.SDK_PUBLISH_TOKEN }}
+
+      - name: Publish Postman collection
+        run: |
+          # Update the Postman collection via API
+          COLLECTION_UID="52040220-ede632f7-784d-4111-ac57-336b9239c078"
+
+          # Read the collection file and wrap it in the required format
+          COLLECTION=$(cat generated/postman/YourApp_API.postman_collection.json)
+
+          # Update collection via Postman API
+          HTTP_CODE=$(curl -s -o /tmp/postman_response.json -w "%{http_code}" \
+            -X PUT "https://api.getpostman.com/collections/${COLLECTION_UID}" \
+            -H "X-Api-Key: ${{ secrets.POSTMAN_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d "{\"collection\": ${COLLECTION}}")
+
+          if [ "$HTTP_CODE" -eq 200 ]; then
+            echo "✅ Postman collection updated successfully"
+            echo "View at: https://www.postman.com/yourapp/yourapp-api-workspace/collection/ede632f7-784d-4111-ac57-336b9239c078"
+          else
+            echo "⚠️ Postman update failed (HTTP $HTTP_CODE) - continuing anyway"
+            cat /tmp/postman_response.json
+          fi
+
+      - name: Commit updated openapi.json to master
+        run: |
+          # Switch to master branch (we're on the tag)
+          git checkout master
+          git pull origin master
+
+          # Copy the regenerated openapi.json (with clean version) to master
+          # The files were regenerated earlier in this job with the tagged version
+          git checkout ${{ needs.check-and-tag.outputs.new_tag }} -- generated/openapi.json generated/postman/
+
+          # Commit if there are changes
+          if ! git diff --quiet --cached generated/; then
+            git commit -m "chore: update openapi.json to ${{ needs.check-and-tag.outputs.new_tag }} [skip ci]"
+            git push origin master
+            echo "Committed openapi.json with version ${{ needs.check-and-tag.outputs.new_version }} to master"
+          else
+            echo "No changes to openapi.json"
+          fi
+
+      - name: Summary
+        run: |
+          echo "## SDK Publish Complete" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version:** ${{ needs.check-and-tag.outputs.new_version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Tag:** ${{ needs.check-and-tag.outputs.new_tag }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Bump Type:** ${{ needs.check-and-tag.outputs.bump_type }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Published SDKs" >> $GITHUB_STEP_SUMMARY
+          echo "- [TypeScript](https://github.com/YourOrg/typescriptsdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Python](https://github.com/YourOrg/pythonsdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Java](https://github.com/YourOrg/javasdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Go](https://github.com/YourOrg/gosdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [PHP](https://github.com/YourOrg/phpsdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [Ruby](https://github.com/YourOrg/rubysdk)" >> $GITHUB_STEP_SUMMARY
+          echo "- [C#](https://github.com/YourOrg/csharpsdk)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Postman" >> $GITHUB_STEP_SUMMARY
+          echo "- [YourApp API Collection](https://www.postman.com/yourapp/yourapp-api-workspace)" >> $GITHUB_STEP_SUMMARY

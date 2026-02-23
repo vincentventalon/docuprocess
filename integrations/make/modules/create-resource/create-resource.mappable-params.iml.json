@@ -1,0 +1,79 @@
+[
+    {
+        "name": "resource_id",
+        "type": "select",
+        "label": "Resource Type",
+        "required": true,
+        "help": "Select the type of resource to create",
+        "options": {
+            "store": "rpc://ListResources",
+            "nested": [
+                {
+                    "name": "payload_type",
+                    "type": "select",
+                    "label": "Data Input Method",
+                    "required": true,
+                    "default": "schema",
+                    "options": [
+                        {
+                            "label": "Dynamic Fields (from schema)",
+                            "value": "schema",
+                            "nested": "rpc://GetResourceFields"
+                        },
+                        {
+                            "label": "Key Value Pairs",
+                            "value": "keyvalue",
+                            "nested": [
+                                {
+                                    "name": "data_keyvalue",
+                                    "type": "array",
+                                    "label": "Data",
+                                    "spec": [
+                                        {
+                                            "name": "key",
+                                            "type": "text",
+                                            "label": "Key",
+                                            "required": true
+                                        },
+                                        {
+                                            "name": "value",
+                                            "type": "text",
+                                            "label": "Value"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "label": "JSON Data",
+                            "value": "json",
+                            "nested": [
+                                {
+                                    "name": "data_json",
+                                    "type": "text",
+                                    "label": "JSON Data",
+                                    "multiline": true,
+                                    "help": "Provide the data as a JSON object"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    {
+        "name": "name",
+        "type": "text",
+        "label": "Name",
+        "required": true,
+        "help": "Name for the new resource"
+    },
+    {
+        "name": "description",
+        "type": "text",
+        "label": "Description",
+        "required": false,
+        "help": "Optional description for the resource"
+    }
+]

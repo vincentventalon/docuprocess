@@ -1,0 +1,8 @@
+[
+    {
+        "name": "resource_id",
+        "type": "text",
+        "label": "Resource ID",
+        "required": true
+    }
+]

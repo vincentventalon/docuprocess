@@ -1,0 +1,42 @@
+name: Publish to Maven Central
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          server-id: central
+          server-username: MAVEN_USERNAME
+          server-password: MAVEN_PASSWORD
+          gpg-private-key: ${{ secrets.GPG_PRIVATE_KEY }}
+          gpg-passphrase: GPG_PASSPHRASE
+
+      - name: Set version from release tag
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          mvn versions:set -DnewVersion="$VERSION" -DgenerateBackupPoms=false
+
+      - name: Publish to Maven Central
+        run: mvn deploy -P sign-artifacts -DskipTests
+        env:
+          MAVEN_USERNAME: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        # Setup:
+        #   1. Create account at https://central.sonatype.com
+        #   2. Register namespace "com.yourapp" (verify via GitHub)
+        #   3. Generate token: Account > Generate User Token
+        #   4. Add repo secrets:
+        #      - MAVEN_CENTRAL_USERNAME: token username
+        #      - MAVEN_CENTRAL_PASSWORD: token password
+        #      - GPG_PRIVATE_KEY: armored GPG private key (gpg --armor --export-secret-keys KEY_ID)
+        #      - GPG_PASSPHRASE: GPG key passphrase

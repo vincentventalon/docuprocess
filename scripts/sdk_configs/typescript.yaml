@@ -1,0 +1,25 @@
+# OpenAPI Generator configuration for TypeScript SDK
+# Generator: typescript-fetch
+
+generatorName: typescript-fetch
+outputDir: ../generated/sdks/typescript
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: typescriptsdk
+
+additionalProperties:
+  npmName: "@yourapp/sdk"
+  npmVersion: "1.0.0"
+  supportsES6: true
+  typescriptThreePlus: true
+  withInterfaces: true
+  useSingleRequestParameter: false
+  modelPropertyNaming: camelCase
+  enumPropertyNaming: PascalCase
+  npmRepository: https://registry.npmjs.org
+  licenseName: MIT
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

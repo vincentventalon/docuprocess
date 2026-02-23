@@ -1,0 +1,57 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+node_modules/
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+__pycache__
+
+# next.js
+.next/
+/out/
+.secrets/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env*.local
+.env
+
+# backend env files
+backend/.env
+
+# vercel
+.vercel
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# Sentry Config File
+.env.sentry-build-plugin
+
+# Generated SDKs (temporary, pushed to separate repos)
+generated/sdks/
+
+# Postman sync (we use generated/postman/ instead)
+.postman/
+postman/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Local database seed (contains production data)
+supabase/seed.sql

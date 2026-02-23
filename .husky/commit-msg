@@ -1,0 +1,5 @@
+# Fix PATH for GUI apps (VSCode, Cursor, etc.) - load nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+(cd frontend && npx --no -- commitlint --edit $1)

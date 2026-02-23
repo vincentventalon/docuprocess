@@ -1,0 +1,21 @@
+# OpenAPI Generator configuration for Go SDK
+# Generator: go
+
+generatorName: go
+outputDir: ../generated/sdks/go
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: gosdk
+
+additionalProperties:
+  packageName: yourapp
+  packageVersion: "1.0.0"
+  isGoSubmodule: false
+  generateInterfaces: true
+  structPrefix: true
+  withGoMod: true
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

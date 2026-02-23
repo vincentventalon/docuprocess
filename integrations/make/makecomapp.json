@@ -1,0 +1,79 @@
+{
+    "fileVersion": 1,
+    "generalCodeFiles": {
+        "base": "general/base.iml.json",
+        "common": "general/common.json",
+        "readme": "README.md",
+        "groups": "modules/groups.json"
+    },
+    "components": {
+        "connection": {
+            "connection1": {
+                "label": "YourApp",
+                "connectionType": "basic",
+                "codeFiles": {
+                    "communication": "connections/connection1/connection1.communication.iml.json",
+                    "params": "connections/connection1/connection1.params.iml.json",
+                    "common": "connections/connection1/connection1.common.json"
+                }
+            }
+        },
+        "module": {
+            "CreateResource": {
+                "label": "Create Resource",
+                "description": "Create a new resource with the provided data.",
+                "moduleType": "action",
+                "actionCrud": "create",
+                "connection": "connection1",
+                "altConnection": null,
+                "codeFiles": {
+                    "communication": "modules/create-resource/create-resource.communication.iml.json",
+                    "staticParams": "modules/create-resource/create-resource.static-params.iml.json",
+                    "mappableParams": "modules/create-resource/create-resource.mappable-params.iml.json",
+                    "interface": "modules/create-resource/create-resource.interface.iml.json",
+                    "samples": "modules/create-resource/create-resource.samples.iml.json",
+                    "scope": "modules/create-resource/create-resource.scope.iml.json"
+                }
+            },
+            "universalmoduleapi": {
+                "label": "Make an API Call",
+                "description": "Performs an arbitrary authorized API call. Use this module to access endpoints not covered by other modules.",
+                "moduleType": "universal",
+                "subtype": "rest",
+                "connection": "connection1",
+                "altConnection": null,
+                "codeFiles": {
+                    "communication": "modules/universalmoduleapi/universalmoduleapi.communication.iml.json",
+                    "staticParams": "modules/universalmoduleapi/universalmoduleapi.static-params.iml.json",
+                    "mappableParams": "modules/universalmoduleapi/universalmoduleapi.mappable-params.iml.json",
+                    "interface": "modules/universalmoduleapi/universalmoduleapi.interface.iml.json",
+                    "samples": "modules/universalmoduleapi/universalmoduleapi.samples.iml.json",
+                    "scope": "modules/universalmoduleapi/universalmoduleapi.scope.iml.json"
+                }
+            }
+        },
+        "function": {},
+        "rpc": {
+            "GetResourceFields": {
+                "label": "Get Resource Fields",
+                "connection": "connection1",
+                "altConnection": null,
+                "codeFiles": {
+                    "communication": "rpcs/get-resource-fields/get-resource-fields.communication.iml.json",
+                    "params": "rpcs/get-resource-fields/get-resource-fields.params.iml.json"
+                }
+            },
+            "ListResources": {
+                "label": "List Resources",
+                "connection": "connection1",
+                "altConnection": null,
+                "codeFiles": {
+                    "communication": "rpcs/list-resources/list-resources.communication.iml.json",
+                    "params": "rpcs/list-resources/list-resources.params.iml.json"
+                }
+            }
+        },
+        "webhook": {}
+    },
+    "origins": []
+}

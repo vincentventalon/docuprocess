@@ -1,0 +1,19 @@
+  {                                                                                                                 
+      "url": "https://api.example.com/v1/account",                                                           
+      "headers": {                                                                                                  
+          "x-api-key": "{{parameters.apiKey}}"                                                                      
+      },                                                                                                            
+      "response": {                                                                                                 
+          "metadata": {                                                                                             
+              "type": "email",                                                                                      
+              "value": "{{body.email}}"                                                                             
+          },                                                                                                        
+          "error": {                                                                                                
+              "message": "[{{statusCode}}] {{body.detail}}"                                                         
+          }                                                                                                         
+      },                                                                                                            
+      "log": {                                                                                                      
+          "sanitize": [                                                                                             
+              "request.headers.x-api-key"                                                                           
+          ]                                                                                                         
+      }    }                                                                                                         

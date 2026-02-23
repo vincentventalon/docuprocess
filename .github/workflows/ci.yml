@@ -1,0 +1,139 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  # ============================================
+  # BACKEND - Tests
+  # ============================================
+  test-backend:
+    name: Backend (Pytest)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for setuptools-scm versioning
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: uv sync --extra dev
+
+      - name: Run tests
+        run: uv run pytest -v --ignore=tests/e2e
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://fake.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "fake-key-for-tests"
+          NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET: "fake-bucket"
+          E2E_API_KEY: ${{ secrets.E2E_API_KEY }}
+          E2E_API_URL: ${{ secrets.E2E_API_URL }}
+
+  # ============================================
+  # API SCHEMA - Check OpenAPI & Postman are up to date
+  # ============================================
+  check-api-schema:
+    name: API Schema Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for setuptools-scm versioning
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install uv
+        run: pip install uv
+
+      - name: Install dependencies
+        run: uv sync
+
+      - name: Generate OpenAPI & Postman collection
+        run: uv run python ../scripts/generate.py
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: "https://fake.supabase.co"
+          SUPABASE_SERVICE_ROLE_KEY: "fake-key-for-tests"
+          NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET: "fake-bucket"
+
+      - name: Check OpenAPI schema is up to date
+        run: |
+          # Compare openapi.json ignoring version field entirely
+          # Version changes based on git tags which may differ between local and CI
+          git show HEAD:generated/openapi.json | jq 'del(.info.version)' > /tmp/committed.json
+          jq 'del(.info.version)' ../generated/openapi.json > /tmp/generated.json
+
+          if diff -q /tmp/committed.json /tmp/generated.json > /dev/null; then
+            echo "✅ OpenAPI schema is up to date"
+          else
+            echo "❌ OpenAPI schema is out of date!"
+            echo "Run 'cd backend && uv run python ../scripts/generate.py' to regenerate"
+            diff /tmp/committed.json /tmp/generated.json | head -50
+            exit 1
+          fi
+
+      - name: Check Postman collection is up to date
+        run: |
+          # Postman collection doesn't have version field, just compare directly
+          if git diff --exit-code ../generated/postman/YourApp_API.postman_collection.json; then
+            echo "✅ Postman collection is up to date"
+          else
+            echo "❌ Postman collection is out of date!"
+            echo "Run 'cd backend && uv run python ../scripts/generate.py' to regenerate"
+            exit 1
+          fi
+
+  # ============================================
+  # DEPLOY BACKEND - Only on master after tests pass
+  # ============================================
+  deploy-backend:
+    name: Deploy Backend (Cloud Run)
+    runs-on: ubuntu-latest
+    needs: [test-backend, check-api-schema]
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+    defaults:
+      run:
+        working-directory: ./backend
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for setuptools-scm versioning
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Copy fonts from frontend
+        run: cp -r ../public/fonts ./fonts
+
+      - name: Deploy using deploy.sh
+        run: ./deploy.sh

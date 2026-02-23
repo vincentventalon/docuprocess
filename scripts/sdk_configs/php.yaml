@@ -1,0 +1,28 @@
+# OpenAPI Generator configuration for PHP SDK
+# Generator: php
+
+generatorName: php
+outputDir: ../generated/sdks/php
+inputSpec: ../generated/openapi.json
+gitUserId: YourOrg
+gitRepoId: phpsdk
+
+additionalProperties:
+  packageName: YourApp
+  invokerPackage: YourApp
+  apiPackage: Api
+  modelPackage: Model
+  composerPackageName: yourapp/sdk
+  artifactVersion: "1.0.0"
+  artifactUrl: "https://github.com/YourOrg/phpsdk"
+  srcBasePath: src
+  developerName: YourApp
+  developerEmail: support@example.com
+  developerOrganization: YourApp
+  developerOrganizationUrl: https://example.com
+  licenseName: MIT
+
+# Files to ignore during generation
+ignoreFileOverride: |
+  .gitignore
+  README.md

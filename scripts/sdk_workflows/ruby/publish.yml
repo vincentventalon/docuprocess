@@ -1,0 +1,32 @@
+name: Publish to RubyGems
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write  # Required for OIDC trusted publishing
+      contents: read
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Build gem
+        run: gem build yourapp.gemspec
+
+      - name: Configure RubyGems credentials (OIDC)
+        uses: rubygems/configure-rubygems-credentials@main
+        # No token needed - uses OIDC trusted publishing
+        # Configure at: https://rubygems.org (gem settings -> Trusted Publisher)
+
+      - name: Publish to RubyGems
+        run: gem push yourapp-*.gem

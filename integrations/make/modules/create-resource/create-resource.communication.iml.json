@@ -1,0 +1,12 @@
+{
+    "url": "/v1/resources",
+    "method": "POST",
+    "body": {
+        "name": "{{parameters.name}}",
+        "description": "{{parameters.description}}",
+        "data": "{{if(parameters.payload_type == 'json', parseJSON(parameters.data_json), if(parameters.payload_type == 'keyvalue', toCollection(parameters.data_keyvalue, 'key', 'value'), omit(parameters, 'resource_id', 'payload_type', 'name', 'description', 'data_keyvalue', 'data_json')))}}"
+    },
+    "response": {
+        "output": "{{body}}"
+    }
+}
