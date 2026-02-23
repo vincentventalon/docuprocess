@@ -62,12 +62,8 @@ module.exports = {
       };
     }
 
-    // Tools, generators, individual integrations
-    if (
-      path.startsWith("/tools/") ||
-      path.startsWith("/generators/") ||
-      path.startsWith("/integrations/")
-    ) {
+    // Individual integrations
+    if (path.startsWith("/integrations/")) {
       return {
         loc: path,
         changefreq: "weekly",
@@ -102,16 +98,6 @@ module.exports = {
         loc: path,
         changefreq: "yearly",
         priority: 0.3,
-        lastmod,
-      };
-    }
-
-    // Hub pages (tools, generators without trailing path)
-    if (["/tools", "/generators"].includes(path)) {
-      return {
-        loc: path,
-        changefreq: "weekly",
-        priority: 0.8,
         lastmod,
       };
     }

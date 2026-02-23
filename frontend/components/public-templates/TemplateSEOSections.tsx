@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CheckCircle2, ChevronDown, ArrowRight, Zap } from "lucide-react";
+import { CheckCircle2, ChevronDown, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { CategorySEOContent } from "@/libs/seo/category-content";
 
@@ -10,17 +10,7 @@ type TemplateSEOSectionsProps = {
   templateSlug: string;
 };
 
-// Map category keys to free tool URLs
-const FREE_TOOL_URLS: Record<string, { url: string; label: string }> = {
-  invoice: { url: "/generators/free-online-invoice-generator", label: "Free Invoice Generator" },
-  receipt: { url: "/generators/free-online-receipt-maker", label: "Free Receipt Maker" },
-  certificate: { url: "/generators/free-online-certificate-maker", label: "Free Certificate Maker" },
-  packing_slip: { url: "/generators/free-online-packing-slip-generator", label: "Free Packing Slip Generator" },
-  shipping_label: { url: "/generators/free-online-shipping-label-maker", label: "Free Shipping Label Maker" },
-};
-
-export function TemplateSEOSections({ category, categoryKey, categorySlug, templateSlug }: TemplateSEOSectionsProps) {
-  const freeTool = FREE_TOOL_URLS[categoryKey];
+export function TemplateSEOSections({ category, categorySlug, templateSlug }: TemplateSEOSectionsProps) {
   return (
     <>
       {/* What is a [Category]? */}
@@ -60,25 +50,12 @@ export function TemplateSEOSections({ category, categoryKey, categorySlug, templ
             <p className="text-gray-600 mb-4">
               This template includes all the essential elements. Try it now and customize it to your needs.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href={`/templates/${categorySlug}/${templateSlug}/editor`}>
-                <Button variant="outline">
-                  Customize this template
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-              {freeTool && (
-                <div className="flex items-center gap-3">
-                  <Link href={freeTool.url}>
-                    <Button variant="outline">
-                      <Zap className="mr-2 h-4 w-4" />
-                      {freeTool.label}
-                    </Button>
-                  </Link>
-                  <p className="text-sm text-gray-500">No signup required</p>
-                </div>
-              )}
-            </div>
+            <Link href={`/templates/${categorySlug}/${templateSlug}/editor`}>
+              <Button variant="outline">
+                Customize this template
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
