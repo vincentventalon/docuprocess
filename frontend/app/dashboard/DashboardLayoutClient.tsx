@@ -58,43 +58,12 @@ export function DashboardLayoutClient({
         return;
       }
 
-      // Identify user in DataFast analytics
-      const userName =
-        user.user_metadata?.full_name || user.user_metadata?.name;
-      window?.datafast?.("identify", {
-        user_id: user.email || user.id,
-        ...(userName && { name: userName }),
-      });
-
       setIsLoading(false);
     };
 
     checkUser();
   }, [router]);
 
-  // Load Crisp chat for authenticated users
-  useEffect(() => {
-    if (isLoading) return;
-
-    const w = window as unknown as {
-      $crisp: unknown[];
-      CRISP_WEBSITE_ID: string;
-    };
-    w.$crisp = [];
-    w.CRISP_WEBSITE_ID = "2db39c91-46a9-40bf-886c-6c136dd92bc9";
-
-    const script = document.createElement("script");
-    script.src = "https://client.crisp.chat/l.js";
-    script.async = true;
-    script.onload = () => {
-      w.$crisp.push(["config", "position:reverse", [true]]);
-    };
-    document.head.appendChild(script);
-
-    return () => {
-      script.remove();
-    };
-  }, [isLoading]);
 
   if (isLoading) {
     return null;

@@ -1,6 +1,5 @@
 import { ReactNode } from "react";
 import { Viewport } from "next";
-import Script from "next/script";
 import { getSEOTags, renderOrganizationSchema } from "@/libs/seo";
 import ClientLayout from "@/components/LayoutClient";
 import config from "@/config";
@@ -30,27 +29,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		>
 			<head>
 				{renderOrganizationSchema()}
-				{/* DataFast queue script - captures identify calls before main script loads */}
-				<script
-					id="datafast-queue"
-					dangerouslySetInnerHTML={{
-						__html: `window.datafast = window.datafast || function() {
-							window.datafast.q = window.datafast.q || [];
-							window.datafast.q.push(arguments);
-						};`,
-					}}
-				/>
 			</head>
 			<body suppressHydrationWarning>
-				{/* ClientLayout contains all the client wrappers (Crisp chat support, toast messages, tooltips, etc.) */}
 				<ClientLayout>{children}</ClientLayout>
-				<Script
-					defer
-					data-website-id="dfid_J3Ru5h78NPRlDpxMxYQ6x"
-					data-domain="parsedocu.com"
-					src="https://datafa.st/js/script.js"
-					strategy="afterInteractive"
-				/>
 			</body>
 		</html>
 	);
