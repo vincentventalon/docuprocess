@@ -2,7 +2,6 @@ import { type NextRequest } from "next/server";
 import { updateSession } from "./libs/supabase/middleware";
 
 export const config = {
-  runtime: 'nodejs',
   matcher: [
     /*
      * Match all request paths except for the ones starting with:
