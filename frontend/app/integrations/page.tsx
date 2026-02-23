@@ -7,81 +7,32 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 export const metadata = getSEOTags({
-  title: `PDF Generation Integrations - No-Code & API | ${config.appName}`,
+  title: `Integrations | ${config.appName}`,
   description:
-    "Automate PDF generation with no-code platforms and REST API. Connect YourApp to your workflow and generate invoices, certificates, and documents automatically.",
+    "Integrate PDF to Markdown conversion with your workflow. Connect to n8n, Make, Zapier, and more. Automate document processing with our REST API.",
   keywords: [
     "pdf api integrations",
-    "zapier pdf",
-    "make pdf",
-    "bubble pdf",
-    "flutterflow pdf",
     "n8n pdf",
-    "airtable pdf",
-    "automate pdf generation",
-    "no-code pdf",
+    "make pdf",
+    "zapier pdf",
+    "automate pdf conversion",
+    "document processing api",
     config.appName,
   ],
   canonicalUrlRelative: "/integrations",
   openGraph: {
-    title: `PDF Generation Integrations - No-Code & API | ${config.appName}`,
+    title: `Integrations | ${config.appName}`,
     description:
-      "Automate PDF generation with no-code platforms and REST API. Connect YourApp to your workflow and generate invoices, certificates, and documents automatically.",
+      "Integrate PDF to Markdown conversion with your workflow. Connect to n8n, Make, Zapier, and more.",
     url: `https://${config.domainName}/integrations`,
   },
 });
 
 const integrations = [
   {
-    name: "Zapier",
-    description: "Connect to 8,000+ apps and automate PDF generation without code.",
-    href: "/integrations/generate-pdf-with-zapier",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0z" fill="#FF4A00"/>
-        <path d="M21.5 14.5h-4v-4a1.5 1.5 0 00-3 0v4h-4a1.5 1.5 0 000 3h4v4a1.5 1.5 0 003 0v-4h4a1.5 1.5 0 000-3z" fill="#fff"/>
-      </svg>
-    ),
-  },
-  {
-    name: "Make",
-    description: "Visual automation platform with advanced data transformation and 1,500+ apps.",
-    href: "/integrations/generate-pdf-with-make",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#6D00CC"/>
-        <path d="M16 6L8 11v10l8 5 8-5V11l-8-5zM8 16l8 5 8-5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
-  },
-  {
-    name: "Bubble",
-    description: "Build web apps visually and generate PDFs with API Connector.",
-    href: "/integrations/generate-pdf-with-bubble",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#0D0D0D"/>
-        <circle cx="12" cy="12" r="5" fill="#3B82F6"/>
-        <circle cx="20" cy="12" r="5" fill="#8B5CF6"/>
-        <circle cx="16" cy="20" r="5" fill="#EC4899"/>
-      </svg>
-    ),
-  },
-  {
-    name: "FlutterFlow",
-    description: "Add PDF generation to your mobile and web apps built with FlutterFlow.",
-    href: "/integrations/generate-pdf-with-flutterflow",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#5925DC"/>
-        <path d="M12 24L16 20L20 24H16L12 20L16 16L20 12H12L16 16L12 20V24Z" fill="white"/>
-      </svg>
-    ),
-  },
-  {
     name: "n8n",
-    description: "Self-hosted workflow automation with 400+ integrations. Open-source.",
-    href: "/integrations/generate-pdf-with-n8n",
+    description: "Self-hosted workflow automation with 400+ integrations. Open-source and privacy-focused.",
+    href: "/integrations/n8n",
     logo: (
       <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
         <rect width="32" height="32" rx="8" fill="#EA4B71"/>
@@ -90,9 +41,31 @@ const integrations = [
     ),
   },
   {
+    name: "Make",
+    description: "Visual automation platform with advanced data transformation and 1,500+ apps.",
+    href: "/integrations/make",
+    logo: (
+      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
+        <rect width="32" height="32" rx="8" fill="#6D00CC"/>
+        <path d="M16 6L8 11v10l8 5 8-5V11l-8-5zM8 16l8 5 8-5" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    ),
+  },
+  {
+    name: "Zapier",
+    description: "Connect to 8,000+ apps and automate document processing without code.",
+    href: "/integrations/zapier",
+    logo: (
+      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
+        <path d="M16 0C7.163 0 0 7.163 0 16s7.163 16 16 16 16-7.163 16-16S24.837 0 16 0z" fill="#FF4A00"/>
+        <path d="M21.5 14.5h-4v-4a1.5 1.5 0 00-3 0v4h-4a1.5 1.5 0 000 3h4v4a1.5 1.5 0 003 0v-4h4a1.5 1.5 0 000-3z" fill="#fff"/>
+      </svg>
+    ),
+  },
+  {
     name: "Airtable",
-    description: "Generate PDFs from Airtable records using Automations and Scripts.",
-    href: "/integrations/generate-pdf-with-airtable",
+    description: "Process documents from Airtable records using Automations and Scripts.",
+    href: "/integrations/airtable",
     logo: (
       <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
         <rect width="32" height="32" rx="8" fill="#FCBF49"/>
@@ -103,38 +76,9 @@ const integrations = [
     ),
   },
   {
-    name: "Google Sheets & Excel",
-    description: "Generate PDFs from spreadsheet data via Make, Zapier, or REST API.",
-    href: "/integrations/generate-pdf-with-google-sheets-excel",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#0F9D58"/>
-        <rect x="8" y="8" width="16" height="16" rx="2" fill="white"/>
-        <rect x="10" y="11" width="5" height="2" fill="#0F9D58"/>
-        <rect x="17" y="11" width="5" height="2" fill="#0F9D58"/>
-        <rect x="10" y="15" width="5" height="2" fill="#0F9D58"/>
-        <rect x="17" y="15" width="5" height="2" fill="#0F9D58"/>
-        <rect x="10" y="19" width="5" height="2" fill="#0F9D58"/>
-        <rect x="17" y="19" width="5" height="2" fill="#0F9D58"/>
-      </svg>
-    ),
-  },
-  {
-    name: "Postman",
-    description: "Test and explore our PDF API with Postman. Generate code snippets.",
-    href: "/integrations/generate-pdf-with-postman",
-    logo: (
-      <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
-        <rect width="32" height="32" rx="8" fill="#FF6C37"/>
-        <circle cx="16" cy="16" r="8" fill="white"/>
-        <path d="M16 10L20 16L16 22L12 16L16 10Z" fill="#FF6C37"/>
-      </svg>
-    ),
-  },
-  {
     name: "REST API",
     description: "Integrate directly with our API for full control and flexibility.",
-    href: "/integrations/generate-pdf-with-rest-api",
+    href: "/docs/api-reference",
     logo: (
       <svg className="w-10 h-10" viewBox="0 0 32 32" fill="none">
         <rect width="32" height="32" rx="8" fill="#0F172A"/>
@@ -164,9 +108,9 @@ export default function IntegrationsPage() {
       <main className="min-h-screen bg-gray-50">
         <div className="max-w-3xl mx-auto px-6 py-16">
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">PDF Generation Integrations</h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Integrations</h1>
             <p className="text-lg text-gray-600">
-              Connect {config.appName} with your favorite tools to automate PDF generation.
+              Connect {config.appName} with your favorite tools to automate PDF conversion.
             </p>
           </div>
 
