@@ -1,108 +1,27 @@
 ---
-title: "Getting Started with PDF Generation API"
-description: "Get started with YourApp in 5 minutes. Design a PDF template, add dynamic variables, preview your document, and make your first API call."
+title: "Getting Started"
+description: "Get started with the product."
 ---
 
-{/* prettier-ignore */}
-import { AnnotatedImage, CircledImage } from '../components/docs/AnnotatedImage'
-import { HowToSchema } from '../components/docs/HowToSchema'
+# Getting Started
 
-<HowToSchema />
+This is a placeholder for your getting started guide.
 
-# Get Started in 5 Minutes
+## Step 1: Create an Account
 
-When you create your account, a `Welcome template` is automatically added to your dashboard so you can start experimenting right away. You can also browse our library of ready-made templates — invoices, packing slips, reports, and more — and duplicate any of them as a starting point for your own design.
+Sign up for an account to get started.
 
-Templates can run in two modes: 
+## Step 2: Get Your API Key
 
-- **Fixed mode** produces a single fixed-size page. Use Fixed mode for documents with a predictable layout like certificates or letters that will best be designed on a single page. If you need to add more pages to a fixed PDF, you can create another Fixed template and combine them.
+Navigate to the dashboard to get your API key.
 
-- **Infinite mode** lets the page grow vertically to fit all your content in a single continuous page. At generation time, the page will be automatically split into multiple pages if the content is too long. Use Infinite mode when the content length varies, such as invoices or reports with dynamic lists.
+## Step 3: Make Your First API Call
 
-## Design a Template
-Let's dive directly into the editor and how to design a template.
+Use your API key to make your first API call.
 
-<AnnotatedImage
-  src="/getstarted1.png"
-  alt="YourApp Editor - showing the left panel, canvas, and right panel"
-  markers={[
-    { number: "1", top: "20%", left: "8%" },
-    { number: "2", top: "30%", left: "8%" },
-    { number: "3", top: "55%", left: "90%" },
-    { number: "4", top: "25%", left: "88%" },
-    { number: "5", top: "37%", left: "8%" },
-    { number: "6", top: "45%", left: "8%" },
-    { number: "7", top: "3%", left: "13%" },
-  ]}
-/>
-
-1. First set a name for your template and select the page format and orientation.
-2. Then optionally add a header and footer to your template. Those will repeat on every page.
-3. Setup pages margins (limiting the content from the edges of the page) and background color.
-4. Setup default font, size, weight, color, alignment.
-5. Add one or more **containers** to your template. Containers are full-width sections that stack vertically and are essential for structuring your layout:
-    - **Grouping** — Content inside a container stays together across page breaks.
-    - **Dynamic content** — Containers can hold expanding elements like auto-growing tables or variable-length text. Tables will automatically break across pages. Expending tables must be single inside a container.
-
-6. Add a new element like a text, image, table etc. 
-7. Preview your template by clicking the "Preview" button in the top right corner of the dashboard ([see section below](#preview-your-template)).
-
-## Add Dynamic Variables
-
-Variables are placeholders for dynamic data that will be replaced with actual values when you generate your PDF. You can use variables in text, images, QR codes, barcodes, shapes and tables. See the [Data Binding](/docs/guides/data-binding) guide for more details.
-
-### Text
-Text elements are used for labels, headings, paragraphs, and any written content.
-
-We use the syntax `{{variable_name}}` to display dynamic data in your PDFs.
-
-### Image, QR Code, Barcode, Shape
-Image, QR Code, Barcode, Shape elements are used to display images, QR codes, barcodes, shapes in your PDFs.
-
-We use the same syntax `{{variable_name}}` to display dynamic data in your images, QR codes, barcodes, shapes but this time the content need to be set in content field in the right side panel.
-![QR Code element with a dynamic variable in the Content field](/qrcode_param.png)
-
-## Preview your template
-
-Once in the preview tab, you can see the rendered PDF with your data applied. The view is refreshed automatically every 2 seconds.
-
-First you must add some testing data for `{{variables}}` you created in the template in the right panel.
-It will be used to preview the template with your data in the left panel.
-
-<AnnotatedImage
-  src="/preview_tab.png"
-  alt="YourApp Preview tab - showing the rendered PDF and template data panel"
-  markers={[
-    { number: "1", top: "50%", left: "15%" },
-    { number: "1", top: "20%", left: "80%" },
-    { number: "2", top: "70%", left: "30%" },
-    { number: "2", top: "50%", left: "80%" },
-    { number: "3", top: "5%", left: "80%" },
-  ]}
-/>
-
-1. Show how it works for `{{email}}` variable.
-
-2. Show how it works for a list of variables. Items is a list of objects with 3 objects: `qty`, `image`, `barcode` and `product_description`. The table is automatically generated based on the list of items.
-
-QRcode and barcode are generated from the `{{item.qrcode}}` and `{{item.barcode}}` variables.
-
-3. `Generate PDF` button can be used to generate a real PDF with your data.
-
-## Get Your API Key and try the API
-
-You can get your API key in the [API key section of your dashboard](/dashboard/api).
-
-You can also directly get a CURL example to generate a PDF with your template and data in the [My Templates page](/dashboard/templates) under the "API" button.
-
-<CircledImage
-  src="/Apicall.png"
-  alt="Template dashboard showing Template ID and API button"
-  maxWidth="100%"
-  circles={[
-    { top: "20%", left: "71%", width: "8%", height: "65%" },
-  ]}
-/>
-
-
-
+```bash
+curl -X POST https://api.example.com/v1/endpoint \
+  -H "Authorization: Bearer YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"key": "value"}'
+```
