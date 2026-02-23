@@ -27,7 +27,6 @@ export function TeamAdminCard({ team }: TeamAdminCardProps) {
       has_paid: team.has_paid,
       price_id: null,
       customer_id: null,
-      settings: null,
       created_at: team.created_at,
       role: "owner", // Admin sees as owner
     };
