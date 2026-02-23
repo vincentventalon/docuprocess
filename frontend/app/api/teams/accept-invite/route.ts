@@ -74,7 +74,6 @@ export async function POST(req: NextRequest) {
         user_id: user.id,
         role: invitation.role,
         invited_by: invitation.invited_by,
-        joined_at: new Date().toISOString(),
       });
 
     if (memberError) {

@@ -40,10 +40,9 @@ import toast from "react-hot-toast";
 interface TeamMember {
   user_id: string;
   role: "owner" | "admin" | "member";
-  joined_at: string;
+  created_at: string;
   profiles: {
     email: string;
-    name: string | null;
   };
 }
 
@@ -94,10 +93,9 @@ export default function TeamSettingsPage() {
         .select(`
           user_id,
           role,
-          joined_at,
+          created_at,
           profiles (
-            email,
-            name
+            email
           )
         `)
         .eq("team_id", currentTeam.id)
@@ -272,13 +270,10 @@ export default function TeamSettingsPage() {
                           </div>
                           <div>
                             <p className="font-medium text-gray-900 text-sm">
-                              {member.profiles.name || member.profiles.email}
+                              {member.profiles.email}
                               {isCurrentUser && (
                                 <span className="text-gray-400 ml-1">(you)</span>
                               )}
-                            </p>
-                            <p className="text-xs text-gray-500">
-                              {member.profiles.email}
                             </p>
                           </div>
                         </div>

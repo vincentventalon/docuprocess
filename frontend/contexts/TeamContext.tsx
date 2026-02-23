@@ -26,7 +26,7 @@ export interface TeamMember {
   team_id: string;
   user_id: string;
   role: "owner" | "admin" | "member";
-  joined_at: string;
+  created_at: string;
 }
 
 export interface TeamWithRole extends Team {
