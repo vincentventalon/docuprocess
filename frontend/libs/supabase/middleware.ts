@@ -2,21 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
 export async function updateSession(request: NextRequest) {
-  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-
-  // If Supabase is not configured, just pass through
-  if (!supabaseUrl || !supabaseKey) {
-    return NextResponse.next({ request });
-  }
-
   let supabaseResponse = NextResponse.next({
     request,
   });
 
   const supabase = createServerClient(
-    supabaseUrl,
-    supabaseKey,
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() {
@@ -38,11 +30,7 @@ export async function updateSession(request: NextRequest) {
   );
 
   // refreshing the auth token
-  try {
-    await supabase.auth.getUser();
-  } catch {
-    // If auth fails, just continue without refreshing
-  }
+  await supabase.auth.getUser();
 
   return supabaseResponse;
 }
