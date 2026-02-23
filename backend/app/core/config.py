@@ -27,6 +27,10 @@ class Settings(BaseSettings):
     MAX_PDF_SIZE_MB: int = 50
     DEFAULT_PAGE_SIZE: str = "A4"
 
+    # PDF Conversion Settings
+    MAX_PDF_CONVERSION_SIZE_MB: int = 10
+    PDF_FETCH_TIMEOUT_SECONDS: int = 30
+
     # Supabase Configuration
     # Used for:
     # 1. Validating API keys from the profiles table

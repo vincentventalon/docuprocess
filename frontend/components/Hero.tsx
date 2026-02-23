@@ -7,14 +7,13 @@ const Hero = () => {
       <div className="max-w-[1600px] mx-auto flex flex-col lg:flex-row items-center lg:items-stretch gap-12 lg:gap-16 px-8 lg:pl-8 lg:pr-0 py-16 lg:py-24">
         <div className="flex flex-col gap-10 lg:gap-14 items-center justify-center text-center lg:text-left lg:items-start lg:justify-start lg:w-[40%] lg:pl-20">
           <h1 className="font-extrabold text-4xl lg:[font-size:clamp(2rem,3vw,3rem)] tracking-tight leading-[1.15]">
-            Ship Your API
+            PDF to Markdown
             <br />
-            Product Faster
+            in Seconds
           </h1>
           <p className="text-lg text-muted-foreground leading-relaxed">
-            A complete SaaS starter kit with FastAPI backend, Next.js frontend,
-            and Supabase. Authentication, payments, teams, and API keys
-            included out of the box.
+            Extract text from any PDF while preserving structure, headings, and
+            formatting. One API call, clean Markdown output.
           </p>
           <div className="flex flex-col gap-3 items-center lg:items-start">
             <div className="flex flex-col xl:flex-row gap-3 items-center lg:items-start">
@@ -26,7 +25,7 @@ const Hero = () => {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground">
-              No credit card required.
+              1,000 free conversions to start.
             </p>
           </div>
         </div>
@@ -38,15 +37,17 @@ const Hero = () => {
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
             <pre className="text-green-400 overflow-x-auto">
-{`$ curl -X POST https://api.yourapp.com/v1/data \\
-  -H "Authorization: Bearer sk_live_..." \\
+{`$ curl -X POST https://api.docuprocess.com/v1/convert/pdf-to-markdown \\
+  -H "x-api-key: sk_live_..." \\
   -H "Content-Type: application/json" \\
-  -d '{"name": "example"}'
+  -d '{"url": "https://example.com/document.pdf"}'
 
 {
-  "id": "data_123",
-  "name": "example",
-  "created_at": "2024-01-15T10:30:00Z"
+  "success": true,
+  "markdown": "# Introduction\\n\\nThis document...",
+  "page_count": 12,
+  "credits_used": 1,
+  "remaining_credits": 999
 }`}
             </pre>
           </div>

@@ -11,7 +11,7 @@
 -- ============================================================================
 
 -- Enable required extensions
-CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA extensions;
 
 -- ============================================================================
 -- PROFILES TABLE
@@ -59,23 +59,8 @@ CREATE TABLE IF NOT EXISTS public.teams (
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
 
--- RLS for teams
+-- RLS for teams (policies added later after team_members exists)
 ALTER TABLE public.teams ENABLE ROW LEVEL SECURITY;
-
--- Team members can view their teams
-CREATE POLICY "Team members can view team"
-    ON public.teams FOR SELECT
-    USING (
-        id IN (
-            SELECT team_id FROM public.team_members WHERE user_id = auth.uid()
-        )
-    );
-
--- Only owners can update their teams (excluding sensitive fields)
-CREATE POLICY "Owners can update team"
-    ON public.teams FOR UPDATE
-    USING (owner_id = auth.uid())
-    WITH CHECK (owner_id = auth.uid());
 
 -- ============================================================================
 -- TEAM MEMBERS TABLE
@@ -115,6 +100,25 @@ CREATE POLICY "Admins can manage team members"
     );
 
 -- ============================================================================
+-- TEAMS POLICIES (now that team_members exists)
+-- ============================================================================
+
+-- Team members can view their teams
+CREATE POLICY "Team members can view team"
+    ON public.teams FOR SELECT
+    USING (
+        id IN (
+            SELECT team_id FROM public.team_members WHERE user_id = auth.uid()
+        )
+    );
+
+-- Only owners can update their teams (excluding sensitive fields)
+CREATE POLICY "Owners can update team"
+    ON public.teams FOR UPDATE
+    USING (owner_id = auth.uid())
+    WITH CHECK (owner_id = auth.uid());
+
+-- ============================================================================
 -- TEAM INVITATIONS TABLE
 -- ============================================================================
 -- Pending team invitations
@@ -123,7 +127,7 @@ CREATE TABLE IF NOT EXISTS public.team_invitations (
     id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     team_id UUID NOT NULL REFERENCES public.teams(id) ON DELETE CASCADE,
     email TEXT NOT NULL,
-    token TEXT NOT NULL UNIQUE DEFAULT encode(gen_random_bytes(32), 'hex'),
+    token TEXT NOT NULL UNIQUE DEFAULT encode(extensions.gen_random_bytes(32), 'hex'),
     role TEXT NOT NULL DEFAULT 'member' CHECK (role IN ('admin', 'member')),
     invited_by UUID REFERENCES auth.users(id),
     expires_at TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '7 days'),
@@ -159,6 +163,7 @@ CREATE TABLE IF NOT EXISTS public.team_api_keys (
     api_key TEXT NOT NULL UNIQUE,
     name TEXT NOT NULL DEFAULT 'Default',
     created_by UUID REFERENCES auth.users(id),
+    last_used_at TIMESTAMPTZ,
     revoked_at TIMESTAMPTZ,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -218,188 +223,3 @@ CREATE POLICY "Team members can view transactions"
 -- Index for faster queries
 CREATE INDEX IF NOT EXISTS idx_transactions_team_id ON public.transactions(team_id);
 CREATE INDEX IF NOT EXISTS idx_transactions_created_at ON public.transactions(created_at DESC);
-
--- ============================================================================
--- HELPER FUNCTIONS
--- ============================================================================
-
--- Generate API key with prefix
-CREATE OR REPLACE FUNCTION public.generate_api_key()
-RETURNS TEXT AS $$
-BEGIN
-    RETURN 'ya_' || encode(gen_random_bytes(24), 'hex');
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- ============================================================================
--- CREDIT FUNCTIONS
--- ============================================================================
-
--- Atomically deduct credits from a team
-CREATE OR REPLACE FUNCTION public.deduct_credit_atomic_team(
-    p_team_id UUID,
-    p_user_id UUID,
-    p_amount INTEGER DEFAULT 1,
-    p_resource_id TEXT DEFAULT NULL,
-    p_api_key_id UUID DEFAULT NULL
-)
-RETURNS JSONB AS $$
-DECLARE
-    v_remaining INTEGER;
-    v_transaction_ref UUID;
-BEGIN
-    -- Atomic update with WHERE condition
-    UPDATE public.teams
-    SET credits = credits - p_amount,
-        updated_at = NOW()
-    WHERE id = p_team_id
-      AND credits >= p_amount
-    RETURNING credits INTO v_remaining;
-
-    IF NOT FOUND THEN
-        RETURN jsonb_build_object(
-            'success', false,
-            'error', 'Insufficient credits'
-        );
-    END IF;
-
-    -- Generate transaction reference
-    v_transaction_ref := gen_random_uuid();
-
-    -- Log the transaction
-    INSERT INTO public.transactions (
-        transaction_ref,
-        team_id,
-        user_id,
-        api_key_id,
-        transaction_type,
-        resource_id,
-        credits
-    ) VALUES (
-        v_transaction_ref,
-        p_team_id,
-        p_user_id,
-        p_api_key_id,
-        'USAGE',
-        p_resource_id,
-        p_amount
-    );
-
-    RETURN jsonb_build_object(
-        'success', true,
-        'remaining_credits', v_remaining,
-        'transaction_ref', v_transaction_ref
-    );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- Refund credits to a team
-CREATE OR REPLACE FUNCTION public.refund_credit_team(
-    p_team_id UUID,
-    p_user_id UUID,
-    p_amount INTEGER DEFAULT 1,
-    p_resource_id TEXT DEFAULT NULL
-)
-RETURNS JSONB AS $$
-DECLARE
-    v_remaining INTEGER;
-BEGIN
-    UPDATE public.teams
-    SET credits = credits + p_amount,
-        updated_at = NOW()
-    WHERE id = p_team_id
-    RETURNING credits INTO v_remaining;
-
-    IF NOT FOUND THEN
-        RETURN jsonb_build_object(
-            'success', false,
-            'error', 'Team not found'
-        );
-    END IF;
-
-    -- Log the refund
-    INSERT INTO public.transactions (
-        team_id,
-        user_id,
-        transaction_type,
-        resource_id,
-        credits
-    ) VALUES (
-        p_team_id,
-        p_user_id,
-        'REFUND',
-        p_resource_id,
-        -p_amount  -- Negative because refunds add credits
-    );
-
-    RETURN jsonb_build_object(
-        'success', true,
-        'remaining_credits', v_remaining
-    );
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- ============================================================================
--- HANDLE NEW USER TRIGGER
--- ============================================================================
--- Automatically create profile and personal team when user signs up
-
-CREATE OR REPLACE FUNCTION public.handle_new_user()
-RETURNS TRIGGER AS $$
-DECLARE
-    v_team_id UUID;
-    v_api_key TEXT;
-BEGIN
-    -- Create profile
-    INSERT INTO public.profiles (id, email, onboarding_done)
-    VALUES (NEW.id, NEW.email, false);
-
-    -- Create personal team
-    v_team_id := gen_random_uuid();
-    INSERT INTO public.teams (id, name, slug, owner_id, credits)
-    VALUES (
-        v_team_id,
-        COALESCE(split_part(NEW.email, '@', 1), 'My Team'),
-        v_team_id::TEXT,  -- Use UUID as slug initially
-        NEW.id,
-        100  -- Free tier credits
-    );
-
-    -- Add user as team owner
-    INSERT INTO public.team_members (team_id, user_id, role)
-    VALUES (v_team_id, NEW.id, 'owner');
-
-    -- Generate API key
-    v_api_key := public.generate_api_key();
-    INSERT INTO public.team_api_keys (team_id, api_key, name, created_by)
-    VALUES (v_team_id, v_api_key, 'Default', NEW.id);
-
-    -- Set last_team_id
-    UPDATE public.profiles SET last_team_id = v_team_id WHERE id = NEW.id;
-
-    RETURN NEW;
-END;
-$$ LANGUAGE plpgsql SECURITY DEFINER;
-
--- Create trigger
-DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
-CREATE TRIGGER on_auth_user_created
-    AFTER INSERT ON auth.users
-    FOR EACH ROW
-    EXECUTE FUNCTION public.handle_new_user();
-
--- ============================================================================
--- GRANT PERMISSIONS
--- ============================================================================
-
--- Grant execute on functions to authenticated users
-GRANT EXECUTE ON FUNCTION public.generate_api_key() TO authenticated;
-
--- Credit functions should only be called by service role (backend)
-REVOKE EXECUTE ON FUNCTION public.deduct_credit_atomic_team FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.deduct_credit_atomic_team FROM authenticated;
-GRANT EXECUTE ON FUNCTION public.deduct_credit_atomic_team TO service_role;
-
-REVOKE EXECUTE ON FUNCTION public.refund_credit_team FROM PUBLIC;
-REVOKE EXECUTE ON FUNCTION public.refund_credit_team FROM authenticated;
-GRANT EXECUTE ON FUNCTION public.refund_credit_team TO service_role;

@@ -6,9 +6,16 @@
 
 ### Project Status
 
-- **Phase**: Initial Setup
+- **Phase**: Pre-production (Building Stage 1)
 - **Repository**: https://github.com/vincentventalon/docuprocess
 - **Origin**: Cloned from vincentventalon/starterkit
+
+### Pre-Production Guidelines
+
+Since we are in pre-production:
+- **No backward compatibility concerns** - Feel free to make breaking changes to APIs, database schema, or code structure
+- **Keep code clean** - Delete unused code, don't add compatibility shims or deprecation warnings
+- **Keep database clean** - Modify migrations directly instead of creating new ones for fixes, reset and rebuild as needed
 
 ## Tech Stack
 

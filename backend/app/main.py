@@ -1,10 +1,11 @@
-"""FastAPI backend for YourApp"""
+"""FastAPI backend for DocuProcess - PDF to Markdown API"""
 
 from importlib.metadata import version as get_version, PackageNotFoundError
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.routers.v1 import account as v1_account
+from app.routers.v1 import convert as v1_convert
 from app.core.config import settings
 
 # Version derived from git tags via setuptools-scm
@@ -15,11 +16,11 @@ except PackageNotFoundError:
     version = "0.0.0"
 
 app = FastAPI(
-    title="YourApp API",
-    description="Your SaaS API backend",
+    title="DocuProcess API",
+    description="PDF to Markdown conversion API - Extract text from PDFs while preserving structure",
     version=version,
     servers=[
-        {"url": "https://api.example.com", "description": "Production"},
+        {"url": "https://api.docuprocess.com", "description": "Production"},
     ],
 )
 
@@ -35,6 +36,7 @@ app.add_middleware(
 # Include routers
 # V1 Public API
 app.include_router(v1_account.router, prefix="/v1/account", tags=["Account"])
+app.include_router(v1_convert.router, prefix="/v1/convert", tags=["Convert"])
 
 
 @app.get("/", include_in_schema=False)
@@ -42,7 +44,7 @@ async def root():
     """Health check endpoint"""
     return {
         "status": "healthy",
-        "service": "YourApp API",
+        "service": "DocuProcess API",
         "version": version,
     }
 

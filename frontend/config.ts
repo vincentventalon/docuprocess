@@ -2,12 +2,12 @@ import { ConfigProps } from "./types/config";
 
 const config = {
   // REQUIRED
-  appName: "Starterkit",
+  appName: "DocuProcess",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "API-first SaaS starter kit with FastAPI, Next.js, and Supabase. Ship your API product faster.",
+    "PDF to Markdown API. Extract text from any PDF while preserving structure, headings, and formatting. One API call, clean Markdown output.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
-  domainName: "example.com",
+  domainName: "docuprocess.com",
   // crisp: {
   //   // Crisp website ID. IF YOU DON'T USE CRISP: just remove this => Then add a support email in this config file (resend.supportEmail) otherwise customer support won't work.
   //   id: "",

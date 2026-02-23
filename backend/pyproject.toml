@@ -28,6 +28,7 @@ dependencies = [
     "openai>=1.50.0",
     "google-cloud-tasks>=2.14.0",
     "google-auth>=2.27.0",
+    "pymupdf4llm>=0.0.17",
 ]
 
 [project.optional-dependencies]

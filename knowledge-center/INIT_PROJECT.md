@@ -57,8 +57,19 @@ supabase link --project-ref <project-ref>
 supabase projects api-keys --project-ref <project-ref>
 
 # Push migrations to new project
+# NOTE: If migrations contain PL/pgSQL functions with $$ delimiters,
+# the CLI may fail. In that case, run the SQL manually via:
+# https://supabase.com/dashboard/project/<project-ref>/sql
 supabase db push
 ```
+
+**Migration Gotchas:**
+
+1. **Table/Policy Order**: Policies that reference other tables must be created AFTER those tables exist. The migration file has been ordered to handle this (teams policies are created after team_members table).
+
+2. **pgcrypto Extension**: On hosted Supabase, pgcrypto is in the `extensions` schema. Use `extensions.gen_random_bytes()` instead of just `gen_random_bytes()`.
+
+3. **Function Definitions**: If `supabase db push` fails with "cannot insert multiple commands", run the migration SQL directly in the Supabase Dashboard SQL Editor.
 
 ### 5. Create Vercel Project
 

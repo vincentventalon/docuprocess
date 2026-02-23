@@ -9,25 +9,25 @@ import { getSEOTags, renderSchemaTags, renderWebSiteSchema } from "@/libs/seo";
 import config from "@/config";
 
 export const metadata = getSEOTags({
-  title: `API Starter Kit | FastAPI + Next.js + Supabase | ${config.appName}`,
+  title: `PDF to Markdown API | ${config.appName}`,
   description:
-    "Ship your API product faster with this production-ready SaaS starter kit. FastAPI backend, Next.js frontend, Supabase auth & database, Stripe payments, and team management included.",
+    "Extract text from any PDF while preserving structure, headings, and formatting. One API call, clean Markdown output. Start free with 1,000 conversions.",
   keywords: [
-    "API starter kit",
-    "FastAPI template",
-    "SaaS boilerplate",
-    "Next.js starter",
-    "Supabase template",
-    "API-first SaaS",
-    "developer tools",
-    "API development",
+    "PDF to Markdown",
+    "PDF API",
+    "PDF text extraction",
+    "convert PDF to text",
+    "PDF parser API",
+    "document conversion API",
+    "Markdown conversion",
+    "PDF processing",
     config.appName,
   ],
   canonicalUrlRelative: "/",
   openGraph: {
-    title: `API Starter Kit | FastAPI + Next.js + Supabase | ${config.appName}`,
+    title: `PDF to Markdown API | ${config.appName}`,
     description:
-      "Ship your API product faster with this production-ready SaaS starter kit. Auth, payments, teams, and database included.",
+      "Extract text from any PDF while preserving structure. One API call, clean Markdown output.",
     url: `https://${config.domainName}/`,
   },
 });

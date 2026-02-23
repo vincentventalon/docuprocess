@@ -24,16 +24,17 @@ const CTA = () => {
                 {/* Text content */}
                 <div className="max-w-xl">
                   <h2 className="font-bold text-3xl md:text-4xl tracking-tight text-slate-900 mb-4">
-                    Ship your API product faster
+                    Start converting PDFs today
                   </h2>
                   <p className="text-lg text-slate-600 mb-8">
-                    Complete documentation, production-ready infrastructure, and a modern tech stack. Focus on your product, not boilerplate.
+                    Get 1,000 free conversions to try the API. No credit card required.
+                    Upgrade when you need more capacity.
                   </p>
                   <div className="flex flex-wrap gap-4">
                     <Button asChild size="lg">
                       <Link href="/signin">
-                        Get started
-                        <span className="ml-2">→</span>
+                        Get started free
+                        <span className="ml-2">&rarr;</span>
                       </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline">
@@ -48,7 +49,7 @@ const CTA = () => {
                 <div className="hidden lg:flex items-center justify-center">
                   <Image
                     src={logo}
-                    alt="YourApp logo"
+                    alt="DocuProcess logo"
                     width={200}
                     height={200}
                     className="opacity-100"

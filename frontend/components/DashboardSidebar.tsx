@@ -2,17 +2,16 @@
 
 import { useEffect, useState } from "react";
 import {
-  FileText,
   Settings,
   LayoutDashboard,
   Code,
   Sparkles,
-  Book,
   Zap,
   BarChart3,
   HardDrive,
   Users,
   Building2,
+  PlayCircle,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -28,14 +27,9 @@ const menuItems = [
     icon: LayoutDashboard,
   },
   {
-    title: "My Templates",
-    url: "/dashboard/templates",
-    icon: FileText,
-  },
-  {
-    title: "Browse Examples",
-    url: "/dashboard/browse-examples",
-    icon: Book,
+    title: "Playground",
+    url: "/dashboard/playground",
+    icon: PlayCircle,
   },
   {
     title: "API",
