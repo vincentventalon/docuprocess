@@ -4,8 +4,8 @@ DECLARE
     v_team_id UUID;
     v_api_key TEXT;
 BEGIN
-    INSERT INTO public.profiles (id, email, onboarding_done)
-    VALUES (NEW.id, NEW.email, false);
+    INSERT INTO public.profiles (id, email)
+    VALUES (NEW.id, NEW.email);
 
     v_team_id := gen_random_uuid();
     INSERT INTO public.teams (id, name, slug, owner_id, credits)

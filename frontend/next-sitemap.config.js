@@ -27,8 +27,6 @@ module.exports = {
     "/signin",
     "/dashboard",
     "/dashboard/**",
-    "/onboarding",
-    "/onboarding/**",
     // Public editor pages (demo mode - not for indexing)
     "/templates/*/*/editor",
   ],

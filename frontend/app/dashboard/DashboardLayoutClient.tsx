@@ -58,18 +58,6 @@ export function DashboardLayoutClient({
         return;
       }
 
-      // Check if user has completed onboarding
-      const { data: profile } = await supabase
-        .from("profiles")
-        .select("onboarding_done")
-        .eq("id", user.id)
-        .single();
-
-      if (profile && profile.onboarding_done === false) {
-        router.push("/onboarding");
-        return;
-      }
-
       // Identify user in DataFast analytics
       const userName =
         user.user_metadata?.full_name || user.user_metadata?.name;

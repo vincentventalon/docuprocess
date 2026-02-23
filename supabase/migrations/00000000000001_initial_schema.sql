@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS public.profiles (
     is_admin BOOLEAN DEFAULT false,
     customer_id TEXT,  -- Stripe customer ID (legacy, now on teams)
     last_team_id UUID,  -- Current active team
-    onboarding_done BOOLEAN DEFAULT false,
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
