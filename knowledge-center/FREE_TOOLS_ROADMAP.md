@@ -6,6 +6,9 @@
 
 Important: on essaye de factoriser et reuse les elements exitant (drop zone de fichier, viewer ect ...)
 
+Do testing on each free tools to be sure it works
+Dont forget to update this document so it stay up to date with what to be donne
+
 ### Légende
 
 - `[CLIENT]` — Faisable 100% dans le navigateur (zéro backend). Lib JS indiquée entre parenthèses.
@@ -31,7 +34,7 @@ Important: on essaye de factoriser et reuse les elements exitant (drop zone de f
 
 Ce sont les outils phares, directement liés au produit.
 
-- [ ] `pdf-to-markdown` — **PDF to Markdown** — Convertir un PDF en Markdown propre — `[CLIENT]` (pdf.js + heuristiques taille police → headings, listes, etc.)
+- [x] `pdf-to-markdown` — **PDF to Markdown** — Convertir un PDF en Markdown propre — `[CLIENT]` (pdf.js + heuristiques taille police → headings, listes, etc.)
 - [x] `pdf-to-text` — **PDF to Text** — Extraire le texte brut d'un PDF — `[CLIENT]` (pdf.js)
 - [ ] `pdf-to-html` — **PDF to HTML** — Convertir un PDF en HTML structuré — `[CLIENT]` (pdf.js + heuristiques) / `[BACKEND]` pour qualité pro
 - [ ] `pdf-to-json` — **PDF to JSON** — Extraire le contenu d'un PDF en JSON structuré — `[CLIENT]` (pdf.js)
@@ -285,10 +288,9 @@ Conversions de formats de données, simples et client-only. Utiles pour les devs
 
 **PDF parsing (pdf.js) :**
 - [ ] PDF to Markdown (heuristiques taille police → headings)
-- [ ] PDF to Text
+- [x] PDF to Text
 - [ ] PDF to JSON
 - [ ] PDF to HTML (basique)
-- [ ] Extract Text from PDF
 - [ ] PDF to XML
 - [ ] Extract PDF Metadata
 - [ ] Extract Links from PDF

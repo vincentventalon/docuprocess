@@ -5,29 +5,28 @@ import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
 import { FileText, Shield, Zap, Globe } from "lucide-react";
 import Link from "next/link";
-import PdfToTextClient from "./PdfToTextClient";
-
+import PdfToMarkdownClient from "./PdfToMarkdownClient";
 
 export const metadata = getSEOTags({
-  title: "PDF to Text Online Free",
+  title: "PDF to Markdown Online Free",
   description:
-    "Extract text from PDF files instantly in your browser. Free, private, no upload needed. Convert any PDF to plain text with one click.",
+    "Convert PDF files to clean Markdown instantly in your browser. Free, private, no upload needed. Headings, lists, and formatting detected automatically.",
   keywords: [
-    "pdf to text",
-    "extract text from pdf",
-    "pdf text extractor",
-    "convert pdf to text",
-    "pdf to txt",
-    "free pdf to text",
-    "online pdf to text",
+    "pdf to markdown",
+    "convert pdf to markdown",
+    "pdf to md",
+    "pdf markdown converter",
+    "extract markdown from pdf",
+    "free pdf to markdown",
+    "online pdf to markdown",
     config.appName,
   ],
-  canonicalUrlRelative: "/tools/pdf-to-text",
+  canonicalUrlRelative: "/tools/pdf-to-markdown",
   openGraph: {
-    title: "PDF to Text — Free Online Tool",
+    title: "PDF to Markdown — Free Online Tool",
     description:
-      "Extract text from PDF files instantly in your browser. 100% private — your file never leaves your device.",
-    url: `https://${config.domainName}/tools/pdf-to-text`,
+      "Convert PDF files to clean Markdown instantly in your browser. 100% private — your file never leaves your device.",
+    url: `https://${config.domainName}/tools/pdf-to-markdown`,
   },
 });
 
@@ -39,8 +38,8 @@ const features = [
   },
   {
     icon: Zap,
-    title: "Instant Extraction",
-    description: "Get results in seconds. No waiting, no queue, no account required.",
+    title: "Smart Formatting",
+    description: "Headings, bold text, and lists are detected automatically using font-size heuristics.",
   },
   {
     icon: Globe,
@@ -49,7 +48,7 @@ const features = [
   },
 ];
 
-export default function PdfToTextPage() {
+export default function PdfToMarkdownPage() {
   return (
     <>
       <Suspense fallback={<div />}>
@@ -63,10 +62,10 @@ export default function PdfToTextPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "PDF to Text — Free Online Tool",
+            name: "PDF to Markdown — Free Online Tool",
             description:
-              "Extract text from PDF files instantly in your browser. Free, private, no upload needed.",
-            url: `https://${config.domainName}/tools/pdf-to-text`,
+              "Convert PDF files to clean Markdown instantly in your browser. Free, private, no upload needed.",
+            url: `https://${config.domainName}/tools/pdf-to-markdown`,
             applicationCategory: "UtilitiesApplication",
             operatingSystem: "Any",
             offers: {
@@ -90,10 +89,11 @@ export default function PdfToTextPage() {
             <FileText className="w-8 h-8 text-primary" />
           </div>
           <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-4">
-            PDF to Text
+            PDF to Markdown
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Extract all the text from any PDF file — instantly, for free, right in your browser.
+            Convert any PDF to clean Markdown — headings, lists, and formatting detected automatically.
+            Instantly, for free, right in your browser.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function PdfToTextPage() {
       {/* Tool */}
       <section className="py-12 lg:py-16">
         <div className="max-w-4xl mx-auto px-8">
-          <PdfToTextClient />
+          <PdfToMarkdownClient />
         </div>
       </section>
 
@@ -137,8 +137,8 @@ export default function PdfToTextPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { step: "1", title: "Upload your PDF", description: "Drag and drop or click to select a PDF file from your device." },
-              { step: "2", title: "Text is extracted", description: "Our client-side engine reads every page and extracts all text content." },
-              { step: "3", title: "Copy or download", description: "Copy the extracted text to your clipboard or download it as a .txt file." },
+              { step: "2", title: "Markdown is generated", description: "Our client-side engine reads every page and converts content to Markdown with smart formatting." },
+              { step: "3", title: "Copy or download", description: "Copy the Markdown to your clipboard or download it as a .md file." },
             ].map((item) => (
               <div key={item.step} className="text-center">
                 <div className="w-10 h-10 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
@@ -162,19 +162,19 @@ export default function PdfToTextPage() {
             {[
               {
                 q: "Is my PDF uploaded to a server?",
-                a: "No. The entire extraction happens in your browser using JavaScript. Your file never leaves your device.",
+                a: "No. The entire conversion happens in your browser using JavaScript. Your file never leaves your device.",
+              },
+              {
+                q: "How are headings detected?",
+                a: "The tool analyzes font sizes in your PDF. Text significantly larger than the body font is converted to Markdown headings (H1, H2, H3). Bold text is wrapped in **bold** markers.",
               },
               {
                 q: "Does it work with scanned PDFs?",
-                a: "This tool extracts embedded text from digital PDFs. For scanned PDFs (images), you need OCR — check out our OCR tools (coming soon).",
+                a: "This tool works with digital PDFs that have embedded text. For scanned PDFs (images), you need OCR — check out our OCR tools (coming soon).",
               },
               {
-                q: "Is there a file size limit?",
-                a: "There's no hard limit, but very large PDFs (100+ MB) may be slow depending on your device. Most PDFs process in under a second.",
-              },
-              {
-                q: "Can I use this for bulk extraction?",
-                a: `For processing many PDFs programmatically, use the ${config.appName} API. It handles thousands of documents with consistent, high-quality output.`,
+                q: "Can I use this for bulk conversion?",
+                a: `For converting many PDFs programmatically, use the ${config.appName} API. It handles thousands of documents with consistent, high-quality Markdown output.`,
               },
             ].map((item) => (
               <div key={item.q} className="border-b pb-5">
@@ -193,14 +193,14 @@ export default function PdfToTextPage() {
             Related tools
           </h2>
           <p className="text-muted-foreground mb-8">
-            More free document parsing tools — coming soon.
+            More free document parsing tools.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link
-              href="/tools/pdf-to-markdown"
+              href="/tools/pdf-to-text"
               className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm text-muted-foreground hover:bg-slate-200 transition-colors"
             >
-              PDF to Markdown
+              PDF to Text
             </Link>
             {[
               "PDF to JSON",
