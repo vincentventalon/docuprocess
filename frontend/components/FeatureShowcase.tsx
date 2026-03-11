@@ -1,59 +1,57 @@
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import BadgePill from "@/components/ui/badge-pill";
-import { FileText, Layout, Table2, Zap, DollarSign, Code } from "lucide-react";
+import { Brain, FileText, Table2, Zap, Lock, Code } from "lucide-react";
 
 const features = [
   {
-    icon: FileText,
-    title: "Accurate Text Extraction",
+    icon: Brain,
+    title: "AI-Optimized Output",
     description:
-      "Extract text from any PDF with high accuracy. Handles scanned documents, multi-column layouts, and complex formatting.",
+      "Get clean Markdown and structured data that LLMs can process directly. No post-processing needed for your RAG pipeline.",
   },
   {
-    icon: Layout,
-    title: "Layout Preservation",
+    icon: FileText,
+    title: "Complex Layout Handling",
     description:
-      "Maintains document structure including headings, paragraphs, lists, and indentation. Your Markdown looks like the original.",
+      "Multi-column layouts, headers, footers, sidebars — we parse them all and preserve the logical reading order.",
   },
   {
     icon: Table2,
-    title: "Table Recognition",
+    title: "Table & Structure Extraction",
     description:
-      "Automatically detects and converts tables to Markdown format. Perfect for data-heavy documents and reports.",
+      "Tables, lists, and hierarchical data are detected and converted into structured formats your AI can understand.",
   },
   {
     icon: Zap,
-    title: "Fast Processing",
+    title: "Fast & Scalable",
     description:
-      "Convert PDFs in seconds, not minutes. Our optimized pipeline handles large documents with ease.",
+      "Process thousands of documents in minutes. Built for production workloads, not just demos.",
   },
   {
-    icon: DollarSign,
-    title: "Simple Pricing",
+    icon: Lock,
+    title: "Privacy-First",
     description:
-      "Pay per conversion with no monthly minimums. Start free with 1,000 credits, then pay as you grow.",
+      "Your documents are processed and deleted. No data retention, no training on your files. SOC 2 compliance on the roadmap.",
   },
   {
     icon: Code,
-    title: "API-First Design",
+    title: "Simple API",
     description:
-      "Built for developers. Clean REST API, comprehensive docs, and SDKs for popular languages.",
+      "One endpoint, one API call. Send a PDF, get structured text back. SDKs for Python, TypeScript, and more.",
   },
 ];
 
 const FeatureShowcase = () => {
   return (
-    <section className="w-full py-12 lg:py-16 bg-background">
+    <section className="w-full py-16 lg:py-24 bg-slate-50 dark:bg-slate-900">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12">
-          <BadgePill>Why DocuProcess</BadgePill>
+          <BadgePill>Why ParseDocu</BadgePill>
           <h2 className="text-3xl lg:text-4xl font-bold tracking-tight mb-4">
-            Built for developers who need clean text
+            Document parsing that AI teams actually need
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Stop wrestling with PDF parsing libraries. Our API handles the
-            complexity so you can focus on your product.
+            Stop wrestling with PDF libraries and regex.
+            Get structured, AI-ready output from any document.
           </p>
         </div>
 
@@ -61,19 +59,13 @@ const FeatureShowcase = () => {
           {features.map((feature) => (
             <div
               key={feature.title}
-              className="p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900"
+              className="p-6 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800"
             >
               <feature.icon className="w-10 h-10 text-primary mb-4" />
               <h3 className="font-semibold text-lg mb-2">{feature.title}</h3>
               <p className="text-muted-foreground">{feature.description}</p>
             </div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button asChild size="lg">
-            <Link href="/signin">Start converting for free</Link>
-          </Button>
         </div>
       </div>
     </section>

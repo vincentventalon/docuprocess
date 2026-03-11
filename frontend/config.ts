@@ -5,7 +5,7 @@ const config = {
   appName: "ParseDocu",
   // REQUIRED: a short description of your app for SEO tags (can be overwritten)
   appDescription:
-    "PDF to Markdown API. Extract text from any PDF while preserving structure, headings, and formatting. One API call, clean Markdown output.",
+    "Document parsing API built for AI. Turn PDFs and documents into clean, structured data ready for LLMs, RAG pipelines, and AI workflows.",
   // REQUIRED (no https://, not trialing slash at the end, just the naked domain)
   domainName: "www.parsedocu.com",
   // crisp: {

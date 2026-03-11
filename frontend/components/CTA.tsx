@@ -1,6 +1,5 @@
-import Link from "next/link";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import ButtonLead from "@/components/ButtonLead";
 import logo from "@/app/icon.png";
 
 const CTA = () => {
@@ -24,32 +23,20 @@ const CTA = () => {
                 {/* Text content */}
                 <div className="max-w-xl">
                   <h2 className="font-bold text-3xl md:text-4xl tracking-tight text-slate-900 mb-4">
-                    Start converting PDFs today
+                    Be the first to try ParseDocu
                   </h2>
                   <p className="text-lg text-slate-600 mb-8">
-                    Get 1,000 free conversions to try the API. No credit card required.
-                    Upgrade when you need more capacity.
+                    We&apos;re building the document parsing API that AI teams deserve.
+                    Join the waitlist to get early access and 1,000 free credits.
                   </p>
-                  <div className="flex flex-wrap gap-4">
-                    <Button asChild size="lg">
-                      <Link href="/signin">
-                        Get started free
-                        <span className="ml-2">&rarr;</span>
-                      </Link>
-                    </Button>
-                    <Button asChild size="lg" variant="outline">
-                      <Link href="/docs">
-                        Read the docs
-                      </Link>
-                    </Button>
-                  </div>
+                  <ButtonLead />
                 </div>
 
                 {/* Logo */}
                 <div className="hidden lg:flex items-center justify-center">
                   <Image
                     src={logo}
-                    alt="DocuProcess logo"
+                    alt="ParseDocu logo"
                     width={200}
                     height={200}
                     className="opacity-100"

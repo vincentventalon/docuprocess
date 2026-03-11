@@ -87,23 +87,17 @@ const Footer = () => {
               </div>
             </div>
 
-            {/* Column 3: Integrations */}
+            {/* Column 3: Free Tools */}
             <div>
               <div className="font-semibold text-white tracking-widest text-sm mb-3">
-                INTEGRATIONS
+                FREE TOOLS
               </div>
               <div className="flex flex-col justify-center items-center md:items-start gap-2 text-sm">
-                <Link href="/zapier" className="text-slate-300 hover:text-white transition-colors">
-                  Zapier
-                </Link>
-                <Link href="/make" className="text-slate-300 hover:text-white transition-colors">
-                  Make
-                </Link>
-                <Link href="/n8n" className="text-slate-300 hover:text-white transition-colors">
-                  n8n
+                <Link href="/tools/pdf-to-text" className="text-slate-300 hover:text-white transition-colors">
+                  PDF to Text
                 </Link>
                 <Link href="/docs/api-reference" className="text-slate-300 hover:text-white transition-colors">
-                  REST API
+                  API Reference
                 </Link>
               </div>
             </div>

@@ -33,6 +33,10 @@ const links: {
   label: string;
 }[] = [
   {
+    href: "/tools/pdf-to-text",
+    label: "Free Tools",
+  },
+  {
     href: "/docs",
     label: "Documentation",
   },

@@ -3,30 +3,32 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Footer from "@/components/Footer";
 import FeatureShowcase from '@/components/FeatureShowcase';
-import Integrations from '@/components/Integrations';
+import FreeTools from '@/components/FreeTools';
 import { getSEOTags, renderSchemaTags, renderWebSiteSchema } from "@/libs/seo";
 import config from "@/config";
 
 export const metadata = getSEOTags({
-  title: `PDF to Markdown API | ${config.appName}`,
+  title: `Document Parsing for AI | ${config.appName}`,
   description:
-    "Extract text from any PDF while preserving structure, headings, and formatting. One API call, clean Markdown output. Start free with 1,000 conversions.",
+    "Turn PDFs and documents into clean, structured data for LLMs, RAG pipelines, and AI workflows. Free tools available, API launching soon.",
   keywords: [
+    "document parsing",
+    "document parsing API",
+    "PDF to text",
     "PDF to Markdown",
-    "PDF API",
-    "PDF text extraction",
-    "convert PDF to text",
-    "PDF parser API",
-    "document conversion API",
-    "Markdown conversion",
-    "PDF processing",
+    "AI document processing",
+    "RAG pipeline",
+    "LLM document extraction",
+    "PDF parser",
+    "document extraction API",
+    "AI-ready data",
     config.appName,
   ],
   canonicalUrlRelative: "/",
   openGraph: {
-    title: `PDF to Markdown API | ${config.appName}`,
+    title: `Document Parsing for AI | ${config.appName}`,
     description:
-      "Extract text from any PDF while preserving structure. One API call, clean Markdown output.",
+      "Turn any document into AI-ready data. Free tools available, API launching soon.",
     url: `https://${config.domainName}/`,
   },
 });
@@ -41,8 +43,8 @@ export default function Home() {
         {renderSchemaTags()}
         {renderWebSiteSchema()}
         <Hero />
+        <FreeTools />
         <FeatureShowcase />
-        <Integrations />
       </main>
       <Footer />
     </>
