@@ -1,6 +1,6 @@
 # Free Tools Roadmap — ParseDocu
 
-> Objectif : maximiser le nombre de free tools pour le SEO, attirer du trafic organique, et convertir vers l'API payante.
+> Objectif : maximiser le nombre de free tools pour le SEO, attirer du trafic organique, et les faire signup.
 > Chaque tool = 1 page `/tools/{slug}` indexable par Google.
 > On ne garde QUE ce qui est du parsing/extraction. Pas d'utilitaires PDF (merge, split, compress...) ni de conversion générique (image-to-pdf, markdown-to-pdf...) — trop concurrentiel, mauvais fit avec la niche.
 
@@ -402,17 +402,7 @@ frontend/app/tools/
 ├── page.tsx                          # Gallery / listing de tous les tools
 ├── [slug]/
 │   └── page.tsx                      # Template générique d'un tool
-├── bank-statement-to-csv/
-│   ├── page.tsx                      # Page générique
-│   └── [bank]/
-│       └── page.tsx                  # Pages programmatiques par banque
-├── invoice-parser/
-│   └── [provider]/
-│       └── page.tsx                  # Pages programmatiques par provider
-└── tax-form-parser/
-    └── [country]/
-        └── page.tsx                  # Pages programmatiques par pays
-```
+s```
 
 ### Stratégie SEO par page
 
@@ -422,10 +412,9 @@ Chaque page de tool doit avoir :
 - **Meta description** : Description unique orientée bénéfice utilisateur
 - **Structured data** : `SoftwareApplication` schema
 - **Internal linking** : Liens vers outils similaires
-- **CTA** : "Need this at scale? Use our API" → pricing/API docs
 
 ### Monétisation
 
 - Limite gratuite : ex. 5 fichiers/jour, 10 pages max par fichier
-- Au-delà : redirection vers signup / pricing
+- Au-delà : redirection vers signup
 - Badge "Powered by ParseDocu API" sur les résultats

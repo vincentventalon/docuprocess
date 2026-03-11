@@ -89,20 +89,20 @@ const Footer = () => {
 
             {/* Column 3: Integrations */}
             <div>
-              <Link href="/integrations" className="font-semibold text-white tracking-widest text-sm mb-3 block hover:text-primary transition-colors">
+              <div className="font-semibold text-white tracking-widest text-sm mb-3">
                 INTEGRATIONS
-              </Link>
+              </div>
               <div className="flex flex-col justify-center items-center md:items-start gap-2 text-sm">
-                <Link href="/integrations/zapier" className="text-slate-300 hover:text-white transition-colors">
+                <Link href="/zapier" className="text-slate-300 hover:text-white transition-colors">
                   Zapier
                 </Link>
-                <Link href="/integrations/make" className="text-slate-300 hover:text-white transition-colors">
+                <Link href="/make" className="text-slate-300 hover:text-white transition-colors">
                   Make
                 </Link>
-                <Link href="/integrations/n8n" className="text-slate-300 hover:text-white transition-colors">
+                <Link href="/n8n" className="text-slate-300 hover:text-white transition-colors">
                   n8n
                 </Link>
-                <Link href="/integrations/rest-api" className="text-slate-300 hover:text-white transition-colors">
+                <Link href="/docs/api-reference" className="text-slate-300 hover:text-white transition-colors">
                   REST API
                 </Link>
               </div>

@@ -4,23 +4,18 @@ import BadgePill from "@/components/ui/badge-pill";
 const integrations = [
   {
     name: "n8n",
-    href: "/integrations/n8n",
+    href: "/n8n",
     color: "#EA4B71",
   },
   {
     name: "Make",
-    href: "/integrations/make",
+    href: "/make",
     color: "#6D00CC",
   },
   {
     name: "Zapier",
-    href: "/integrations/zapier",
+    href: "/zapier",
     color: "#FF4A00",
-  },
-  {
-    name: "Airtable",
-    href: "/integrations/airtable",
-    color: "#18BFFF",
   },
 ];
 
