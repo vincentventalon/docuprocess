@@ -4,6 +4,8 @@
 > Chaque tool = 1 page `/tools/{slug}` indexable par Google.
 > On ne garde QUE ce qui est du parsing/extraction. Pas d'utilitaires PDF (merge, split, compress...) ni de conversion générique (image-to-pdf, markdown-to-pdf...) — trop concurrentiel, mauvais fit avec la niche.
 
+Important: on essaye de factoriser et reuse les elements exitant (drop zone de fichier, viewer ect ...)
+
 ### Légende
 
 - `[CLIENT]` — Faisable 100% dans le navigateur (zéro backend). Lib JS indiquée entre parenthèses.
@@ -30,7 +32,7 @@
 Ce sont les outils phares, directement liés au produit.
 
 - [ ] `pdf-to-markdown` — **PDF to Markdown** — Convertir un PDF en Markdown propre — `[CLIENT]` (pdf.js + heuristiques taille police → headings, listes, etc.)
-- [ ] `pdf-to-text` — **PDF to Text** — Extraire le texte brut d'un PDF — `[CLIENT]` (pdf.js)
+- [x] `pdf-to-text` — **PDF to Text** — Extraire le texte brut d'un PDF — `[CLIENT]` (pdf.js)
 - [ ] `pdf-to-html` — **PDF to HTML** — Convertir un PDF en HTML structuré — `[CLIENT]` (pdf.js + heuristiques) / `[BACKEND]` pour qualité pro
 - [ ] `pdf-to-json` — **PDF to JSON** — Extraire le contenu d'un PDF en JSON structuré — `[CLIENT]` (pdf.js)
 - [ ] `pdf-to-csv` — **PDF to CSV** — Extraire les tableaux d'un PDF en CSV — `[BACKEND]`
