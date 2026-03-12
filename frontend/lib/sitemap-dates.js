@@ -13,8 +13,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Pre-generated dates from git history (created by scripts/generate-sitemap-dates.js)
-// Use __dirname to resolve relative to this file, not cwd (which is frontend/ during build)
-const DATES_FILE = path.join(__dirname, "../../generated/sitemap-dates.json");
+const DATES_FILE = path.join(__dirname, "../generated/sitemap-dates.json");
 
 // Cache for static page dates (loaded once from JSON)
 let staticDatesCache = null;
@@ -32,9 +31,6 @@ function loadStaticDates() {
   }
 
   try {
-    console.log(`[sitemap-dates] __dirname: ${__dirname}`);
-    console.log(`[sitemap-dates] Resolved path: ${DATES_FILE}`);
-    console.log(`[sitemap-dates] File exists: ${fs.existsSync(DATES_FILE)}`);
     if (fs.existsSync(DATES_FILE)) {
       const content = fs.readFileSync(DATES_FILE, "utf-8");
       staticDatesCache = JSON.parse(content);

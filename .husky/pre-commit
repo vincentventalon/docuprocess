@@ -7,8 +7,8 @@ export NVM_DIR="$HOME/.nvm"
 
 # Regenerate sitemap dates from git history
 node scripts/generate-sitemap-dates.js > /dev/null
-if ! git diff --quiet generated/sitemap-dates.json; then
-  git add generated/sitemap-dates.json
+if ! git diff --quiet frontend/generated/sitemap-dates.json; then
+  git add frontend/generated/sitemap-dates.json
   echo "✓ Sitemap dates updated and staged"
 fi
 

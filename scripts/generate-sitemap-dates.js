@@ -13,7 +13,7 @@ const { execSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-const OUTPUT_FILE = path.join(__dirname, "../generated/sitemap-dates.json");
+const OUTPUT_FILE = path.join(__dirname, "../frontend/generated/sitemap-dates.json");
 
 /**
  * Recursively find files matching a pattern
