@@ -32,6 +32,9 @@ function loadStaticDates() {
   }
 
   try {
+    console.log(`[sitemap-dates] __dirname: ${__dirname}`);
+    console.log(`[sitemap-dates] Resolved path: ${DATES_FILE}`);
+    console.log(`[sitemap-dates] File exists: ${fs.existsSync(DATES_FILE)}`);
     if (fs.existsSync(DATES_FILE)) {
       const content = fs.readFileSync(DATES_FILE, "utf-8");
       staticDatesCache = JSON.parse(content);
