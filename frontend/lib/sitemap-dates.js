@@ -13,7 +13,8 @@ const fs = require("fs");
 const path = require("path");
 
 // Pre-generated dates from git history (created by scripts/generate-sitemap-dates.js)
-const DATES_FILE = path.join(process.cwd(), "generated/sitemap-dates.json");
+// Use __dirname to resolve relative to this file, not cwd (which is frontend/ during build)
+const DATES_FILE = path.join(__dirname, "../../generated/sitemap-dates.json");
 
 // Cache for static page dates (loaded once from JSON)
 let staticDatesCache = null;
