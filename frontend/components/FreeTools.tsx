@@ -14,8 +14,8 @@ const tools = [
     icon: FileCode,
     title: "PDF to Markdown",
     description: "Convert PDF documents into clean Markdown with preserved structure.",
-    href: "#",
-    available: false,
+    href: "/tools/pdf-to-markdown",
+    available: true,
   },
   {
     icon: FileJson,
