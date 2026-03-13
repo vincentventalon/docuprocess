@@ -48,8 +48,8 @@ const tools = [
     icon: FileJson,
     title: "PDF to JSON",
     description: "Extract structured data from PDFs into machine-readable JSON.",
-    href: "#",
-    available: false,
+    href: "/tools/pdf-to-json",
+    available: true,
   },
   {
     icon: Table2,

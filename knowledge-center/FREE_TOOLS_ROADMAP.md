@@ -37,7 +37,7 @@ Ce sont les outils phares, directement liés au produit.
 - [x] `pdf-to-markdown` — **PDF to Markdown** — Convertir un PDF en Markdown propre — `[CLIENT]` (pdf.js + heuristiques taille police → headings, listes, etc.)
 - [x] `pdf-to-text` — **PDF to Text** — Extraire le texte brut d'un PDF — `[CLIENT]` (pdf.js)
 - [ ] `pdf-to-html` — **PDF to HTML** — Convertir un PDF en HTML structuré — `[CLIENT]` (pdf.js + heuristiques) / `[BACKEND]` pour qualité pro
-- [ ] `pdf-to-json` — **PDF to JSON** — Extraire le contenu d'un PDF en JSON structuré — `[CLIENT]` (pdf.js)
+- [x] `pdf-to-json` — **PDF to JSON** — Extraire le contenu d'un PDF en JSON structuré — `[CLIENT]` (pdf.js)
 - [ ] `pdf-to-csv` — **PDF to CSV** — Extraire les tableaux d'un PDF en CSV — `[BACKEND]`
 - [ ] `extract-tables-from-pdf` — **Extract Tables from PDF** — Détecter et extraire tous les tableaux d'un PDF — `[BACKEND]`
 - [ ] `extract-text-from-pdf` — **Extract Text from PDF** — Extraction de texte avec préservation de la mise en page — `[CLIENT]` (pdf.js)
@@ -289,7 +289,7 @@ Conversions de formats de données, simples et client-only. Utiles pour les devs
 **PDF parsing (pdf.js) :**
 - [ ] PDF to Markdown (heuristiques taille police → headings)
 - [x] PDF to Text
-- [ ] PDF to JSON
+- [x] PDF to JSON
 - [ ] PDF to HTML (basique)
 - [ ] PDF to XML
 - [ ] Extract PDF Metadata

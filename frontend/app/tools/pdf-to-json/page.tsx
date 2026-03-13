@@ -3,31 +3,30 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getSEOTags } from "@/libs/seo";
 import config from "@/config";
-import { FileText, Shield, Zap, Globe } from "lucide-react";
+import { FileJson, Shield, Zap, Globe } from "lucide-react";
 import Link from "next/link";
-import PdfToTextClient from "./PdfToTextClient";
-
+import PdfToJsonClient from "./PdfToJsonClient";
 
 export const metadata = getSEOTags({
-  title: "PDF to Text Online Free",
+  title: "PDF to JSON Online Free",
   description:
-    "Extract text from PDF files instantly in your browser. Free, private, no upload needed. Convert any PDF to plain text with one click.",
+    "Extract structured JSON from PDF files instantly in your browser. Free, private, no upload needed. Get page content, metadata, and text lines as machine-readable JSON.",
   keywords: [
-    "pdf to text",
-    "extract text from pdf",
-    "pdf text extractor",
-    "convert pdf to text",
-    "pdf to txt",
-    "free pdf to text",
-    "online pdf to text",
+    "pdf to json",
+    "convert pdf to json",
+    "pdf json extractor",
+    "extract json from pdf",
+    "pdf to structured data",
+    "free pdf to json",
+    "online pdf to json",
     config.appName,
   ],
-  canonicalUrlRelative: "/tools/pdf-to-text",
+  canonicalUrlRelative: "/tools/pdf-to-json",
   openGraph: {
-    title: "PDF to Text — Free Online Tool",
+    title: "PDF to JSON — Free Online Tool",
     description:
-      "Extract text from PDF files instantly in your browser. 100% private — your file never leaves your device.",
-    url: `https://${config.domainName}/tools/pdf-to-text`,
+      "Extract structured JSON from PDF files instantly in your browser. 100% private — your file never leaves your device.",
+    url: `https://${config.domainName}/tools/pdf-to-json`,
   },
 });
 
@@ -39,8 +38,8 @@ const features = [
   },
   {
     icon: Zap,
-    title: "Instant Extraction",
-    description: "Get results in seconds. No waiting, no queue, no account required.",
+    title: "Structured Output",
+    description: "Get clean JSON with metadata, page dimensions, text content, and individual lines with coordinates.",
   },
   {
     icon: Globe,
@@ -49,7 +48,7 @@ const features = [
   },
 ];
 
-export default function PdfToTextPage() {
+export default function PdfToJsonPage() {
   return (
     <>
       <Suspense fallback={<div />}>
@@ -63,10 +62,10 @@ export default function PdfToTextPage() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: "PDF to Text — Free Online Tool",
+            name: "PDF to JSON — Free Online Tool",
             description:
-              "Extract text from PDF files instantly in your browser. Free, private, no upload needed.",
-            url: `https://${config.domainName}/tools/pdf-to-text`,
+              "Extract structured JSON from PDF files instantly in your browser. Free, private, no upload needed.",
+            url: `https://${config.domainName}/tools/pdf-to-json`,
             applicationCategory: "UtilitiesApplication",
             operatingSystem: "Any",
             offers: {
@@ -87,13 +86,14 @@ export default function PdfToTextPage() {
       <section className="bg-slate-50 dark:bg-slate-900 w-full">
         <div className="max-w-4xl mx-auto px-8 py-16 lg:py-20 text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-primary/10 mb-6">
-            <FileText className="w-8 h-8 text-primary" />
+            <FileJson className="w-8 h-8 text-primary" />
           </div>
           <h1 className="font-extrabold text-4xl lg:text-5xl tracking-tight mb-4">
-            PDF to Text
+            PDF to JSON
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Extract all the text from any PDF file — instantly, for free, right in your browser.
+            Extract structured JSON from any PDF — metadata, page content, and text lines with coordinates.
+            Instantly, for free, right in your browser.
           </p>
         </div>
       </section>
@@ -101,7 +101,7 @@ export default function PdfToTextPage() {
       {/* Tool */}
       <section className="py-12 lg:py-16">
         <div className="max-w-4xl mx-auto px-8">
-          <PdfToTextClient />
+          <PdfToJsonClient />
         </div>
       </section>
 
@@ -137,8 +137,8 @@ export default function PdfToTextPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {[
               { step: "1", title: "Upload your PDF", description: "Drag and drop or click to select a PDF file from your device." },
-              { step: "2", title: "Text is extracted", description: "Our client-side engine reads every page and extracts all text content." },
-              { step: "3", title: "Copy or download", description: "Copy the extracted text to your clipboard or download it as a .txt file." },
+              { step: "2", title: "JSON is generated", description: "Our client-side engine reads every page and structures the content into clean, machine-readable JSON." },
+              { step: "3", title: "Copy or download", description: "Copy the JSON to your clipboard or download it as a .json file." },
             ].map((item) => (
               <div key={item.step} className="text-center">
                 <div className="w-10 h-10 rounded-full bg-primary text-white font-bold text-lg flex items-center justify-center mx-auto mb-4">
@@ -161,6 +161,10 @@ export default function PdfToTextPage() {
           <div className="space-y-6">
             {[
               {
+                q: "What does the JSON output include?",
+                a: "The output includes PDF metadata (title, author, dates), and for each page: dimensions, full text, and individual lines with position coordinates and font information.",
+              },
+              {
                 q: "Is my PDF uploaded to a server?",
                 a: "No. The entire extraction happens in your browser using JavaScript. Your file never leaves your device.",
               },
@@ -169,12 +173,8 @@ export default function PdfToTextPage() {
                 a: "This tool extracts embedded text from digital PDFs. For scanned PDFs (images), you need OCR — check out our OCR tools (coming soon).",
               },
               {
-                q: "Is there a file size limit?",
-                a: "There's no hard limit, but very large PDFs (100+ MB) may be slow depending on your device. Most PDFs process in under a second.",
-              },
-              {
                 q: "Can I use this for bulk extraction?",
-                a: `For processing many PDFs programmatically, use the ${config.appName} API. It handles thousands of documents with consistent, high-quality output.`,
+                a: `For extracting JSON from many PDFs programmatically, use the ${config.appName} API. It handles thousands of documents with consistent, structured output.`,
               },
             ].map((item) => (
               <div key={item.q} className="border-b pb-5">
@@ -193,20 +193,20 @@ export default function PdfToTextPage() {
             Related tools
           </h2>
           <p className="text-muted-foreground mb-8">
-            More free document parsing tools — coming soon.
+            More free document parsing tools.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/tools/pdf-to-text"
+              className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm text-muted-foreground hover:bg-slate-200 transition-colors"
+            >
+              PDF to Text
+            </Link>
             <Link
               href="/tools/pdf-to-markdown"
               className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm text-muted-foreground hover:bg-slate-200 transition-colors"
             >
               PDF to Markdown
-            </Link>
-            <Link
-              href="/tools/pdf-to-json"
-              className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm text-muted-foreground hover:bg-slate-200 transition-colors"
-            >
-              PDF to JSON
             </Link>
             {[
               "PDF to HTML",

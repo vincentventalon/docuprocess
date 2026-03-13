@@ -202,8 +202,13 @@ export default function PdfToMarkdownPage() {
             >
               PDF to Text
             </Link>
+            <Link
+              href="/tools/pdf-to-json"
+              className="inline-flex items-center px-3 py-1.5 rounded-full bg-slate-100 text-sm text-muted-foreground hover:bg-slate-200 transition-colors"
+            >
+              PDF to JSON
+            </Link>
             {[
-              "PDF to JSON",
               "PDF to HTML",
               "Extract Tables from PDF",
               "PDF Word Counter",
