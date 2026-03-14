@@ -169,11 +169,14 @@ export default function AboutPage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href={`mailto:${config.resend.supportEmail}`}
-              className="btn btn-primary"
+              className="inline-flex items-center justify-center h-10 px-6 rounded-md text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
             >
               Send us an email
             </a>
-            <Link href="/docs" className="btn btn-outline">
+            <Link
+              href="/docs"
+              className="inline-flex items-center justify-center h-10 px-6 rounded-md text-sm font-medium border border-primary text-primary bg-background hover:bg-primary/10 transition-colors"
+            >
               Read the docs
             </Link>
           </div>

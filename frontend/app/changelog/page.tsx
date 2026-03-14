@@ -7,19 +7,19 @@ import { History, Plus, Sparkles, Wrench } from "lucide-react";
 
 export const metadata = getSEOTags({
   title: `Changelog | ${config.appName}`,
-  description: `See what's new in ${config.appName}. Track product updates, new features, improvements, and bug fixes to our PDF generation API and template editor.`,
+  description: `See what's new in ${config.appName}. Track product updates, new features, improvements, and bug fixes to our PDF to Markdown conversion API.`,
   keywords: [
     "changelog",
     "release notes",
     "updates",
     "new features",
-    "PDF API updates",
+    "PDF to Markdown updates",
     config.appName,
   ],
   canonicalUrlRelative: "/changelog",
   openGraph: {
     title: `Changelog | ${config.appName}`,
-    description: `See what's new in ${config.appName}. Track product updates, new features, improvements, and bug fixes to our PDF generation API and template editor.`,
+    description: `See what's new in ${config.appName}. Track product updates, new features, improvements, and bug fixes to our PDF to Markdown conversion API.`,
     url: `https://${config.domainName}/changelog`,
   },
 });
@@ -34,156 +34,17 @@ interface Change {
 interface WeekEntry {
   dateRange: string;
   productUpdates: Change[];
-  templates?: string[];
 }
 
 const changelog: WeekEntry[] = [
   {
-    dateRange: "Feb 10-15, 2026",
+    dateRange: "Mar 14, 2026",
     productUpdates: [
-      { type: "added", text: "**Organisations** - Multi-user support with roles (owner/admin/member) and email invitations" },
-      { type: "added", text: "**Multiple API Keys** - Manage multiple API keys per organisation" },
-      { type: "added", text: "**[Async PDF Generation](/docs/api-reference)** - Background generation with real-time status tracking" },
-      { type: "added", text: "**[n8n Community Node](/integrations/generate-pdf-with-n8n)** - Official node with AI Agent compatibility" },
-      { type: "improved", text: "**[Make.com](/integrations/generate-pdf-with-make)** - Enhanced universal module" },
-      { type: "added", text: "**[S3 Integration](/docs/integrations/upload-to-s3)** now available for all users" },
-      { type: "added", text: "**Mobile navigation** in dashboard" },
-      { type: "improved", text: "**Unsaved changes indicator** in template editor" },
-      { type: "added", text: "**Rate limiting headers** on API endpoints to help manage your quotas" },
-    ],
-    templates: [
-      "6 Purchase Order templates",
-    ],
-  },
-  {
-    dateRange: "Jan 31 - Feb 9, 2026",
-    productUpdates: [
-      { type: "added", text: "**[Official SDKs](/docs/sdks/typescript)** for 7 languages: TypeScript, Python, Java, Go, PHP, Ruby, C#" },
-      { type: "added", text: "**S3 Storage Integration** infrastructure for enterprise storage" },
-      { type: "added", text: "**Auto-generated Postman Collection** from API schema" },
-      { type: "fixed", text: "Table pagination for multi-page PDF rendering" },
-    ],
-    templates: [
-      "4 Purchase Order templates (Simple, Discounts/Taxes, Grouped Category, Professional)",
-      "8 Receipt templates (Rent, Professional, Payment, Donation, Sales, Deposit, Cafe, Retail)",
-      "2 Shipping Label templates (A4, Letter)",
-    ],
-  },
-  {
-    dateRange: "Jan 24-30, 2026",
-    productUpdates: [
-      { type: "added", text: "**Rich Text Editor toolbar** with inline formatting (bold, italic, underline, links)" },
-      { type: "added", text: "**[About page](/about)** and **[Security page](/security)**" },
-      { type: "added", text: "**[Homepage pricing section](/pricing)** with plan comparisons" },
-      { type: "fixed", text: "Table cell editing when table is inside a container div" },
-    ],
-  },
-  {
-    dateRange: "Jan 17-23, 2026",
-    productUpdates: [
-      { type: "added", text: "**Onboarding flow** with live preview and optimized PDF generation" },
-      { type: "added", text: "**Zoom controls** in the template designer" },
-      { type: "added", text: "**Multi-select drag** - select and move multiple elements together" },
-      { type: "added", text: "**[Integration pages](/integrations)** for Airtable, Bubble, FlutterFlow, Make, N8n, Postman, REST API, Zapier" },
-      { type: "fixed", text: "PDF import coordinate conversion (points to mm) for proper scaling" },
-    ],
-  },
-  {
-    dateRange: "Jan 10-16, 2026",
-    productUpdates: [
-      { type: "added", text: "**[A6 page format](/docs/designer/page-settings)** option for templates" },
-      { type: "improved", text: "**Self-hosted variable fonts** for consistent rendering across frontend and backend" },
-      { type: "improved", text: "CSS-based shapes replacing SVG for better PDF rendering" },
-    ],
-  },
-  {
-    dateRange: "Jan 3-9, 2026",
-    productUpdates: [
-      { type: "added", text: "**[Templates API](/docs/api-reference)** (`/v1/templates`) for template management" },
-      { type: "added", text: "**[Account API](/docs/api-reference)** (`/v1/account`) for account operations" },
-      { type: "added", text: "**[QR Code & Barcode support](/docs/guides/barcodes-qrcodes)** in templates with system variable injection" },
-      { type: "added", text: "**[Public Template Library](/templates)** at `/templates` with category filters" },
-      { type: "added", text: "**Analytics Dashboard** with credits chart and transactions table" },
-      { type: "added", text: "**[Zapier integration](/integrations/generate-pdf-with-zapier)** with PDF file output for email attachments" },
-      { type: "added", text: "**[Documentation site](/docs)** with Nextra v4" },
-      { type: "improved", text: "Backend async performance - eliminated ~100ms overhead per request" },
-      { type: "improved", text: "Centralized Supabase client with singleton pattern" },
-    ],
-    templates: [
-      "2 Invoice templates (Standard, Professional)",
-      "2 Certificate templates (Achievement, Completion)",
-    ],
-  },
-  {
-    dateRange: "Dec 27 - Jan 2, 2026",
-    productUpdates: [
-      { type: "added", text: "**Custom StylePanel** replacing GrapesJS native panel with cleaner UI" },
-      { type: "added", text: "**Custom LeftPanel** with template info, layer management, and element dropdown" },
-      { type: "added", text: "**[Shape elements](/docs/designer/components)** - lines, rectangles, and circles for visual design" },
-      { type: "added", text: "**Transparent color option** with checkerboard pattern preview" },
-      { type: "added", text: "**[Page margins](/docs/designer/page-settings)** moved to StylePanel for better UX" },
-      { type: "added", text: "**Add missing key** button in Template Data panel" },
-      { type: "improved", text: "UI translations fixed to English (Landscape, Layers, etc.)" },
-    ],
-  },
-  {
-    dateRange: "Dec 20-26, 2025",
-    productUpdates: [
-      { type: "added", text: "**Infinite mode** - templates can extend beyond single page boundaries" },
-      { type: "added", text: "**Template rename** endpoint without creating new version" },
-      { type: "improved", text: "Border property detection when switching between elements" },
-      { type: "fixed", text: "Table column resize - now uses percentage widths for responsiveness" },
-      { type: "fixed", text: "Border mode switching bug when toggling configurations" },
-    ],
-  },
-  {
-    dateRange: "Dec 13-19, 2025",
-    productUpdates: [
-      { type: "added", text: "**[Container/Section component](/docs/designer/sections)** for organizing template sections" },
-      { type: "added", text: "**[Table column resize handles](/docs/designer/tables)** for manual width adjustment" },
-      { type: "added", text: "**Custom editor toolbar**" },
-      { type: "improved", text: "Table row and column manipulation" },
-      { type: "fixed", text: "Table resize constraints - columns maintain proportions" },
-      { type: "fixed", text: "Padding and border UI controls" },
-    ],
-  },
-  {
-    dateRange: "Dec 6-12, 2025",
-    productUpdates: [
-      { type: "added", text: "**Alignment guides** with visual snapping system" },
-      { type: "improved", text: "Header and footer positioning detection and spacing" },
-      { type: "improved", text: "Element drop behavior between page sections" },
-      { type: "improved", text: "Initial table layout behavior in editor" },
-    ],
-  },
-  {
-    dateRange: "Nov 29 - Dec 5, 2025",
-    productUpdates: [
-      { type: "added", text: "**[Example Templates Gallery](/templates)** - browse and instantiate pre-made templates" },
-      { type: "added", text: "**Admin Templates System** with versioning and history tracking" },
-      { type: "added", text: "`instantiate_template_from_example()` database function" },
-      { type: "improved", text: "Template designer with better element handling" },
-      { type: "improved", text: "Admin sidebar navigation with example templates option" },
-    ],
-  },
-  {
-    dateRange: "Nov 22-28, 2025",
-    productUpdates: [
-      { type: "added", text: "**[System variables](/docs/guides/system-variables)** - `{{page_number}}`, `{{total_pages}}`, `{{current_date}}`, date components" },
-      { type: "added", text: "**[Page settings](/docs/designer/page-settings)** - A0-A5 formats, portrait/landscape, custom margins" },
-      { type: "improved", text: "PDF generation refactored into modular pipeline" },
-      { type: "fixed", text: "Header/footer spacing and margin handling on multi-page layouts" },
-    ],
-  },
-  {
-    dateRange: "Nov 15-21, 2025",
-    productUpdates: [
-      { type: "added", text: "**[Template Designer](/docs/designer/overview)** with GrapesJS drag-and-drop editor" },
-      { type: "added", text: "**[Templates API](/docs/api-reference)** - create, save, import, clone, delete templates" },
-      { type: "added", text: "**API Key Management** - reset keys and view usage logs" },
-      { type: "added", text: "**Account Management** - account settings and deletion" },
-      { type: "added", text: "**Dashboard Pages** - templates, API docs, settings" },
-      { type: "added", text: "Template storage with versioning and metadata support" },
+      { type: "added", text: "**[PDF to Markdown API](/docs/api-reference)** - Convert any PDF document to clean, structured Markdown via REST API" },
+      { type: "added", text: "**[Free PDF to JSON tool](/tools/pdf-to-json)** - Try PDF conversion directly in the browser" },
+      { type: "added", text: "**Team workspaces** with roles (owner/admin/member) and API key management" },
+      { type: "added", text: "**[Documentation site](/docs)** with API reference, guides, and quickstart" },
+      { type: "added", text: "**Credit-based billing** with Stripe integration" },
     ],
   },
 ];
@@ -304,24 +165,6 @@ export default function ChangelogPage() {
                       </ul>
                     </div>
 
-                    {/* Templates Section */}
-                    {entry.templates && entry.templates.length > 0 && (
-                      <div className="pt-4 mt-4 border-t">
-                        <h3 className="font-semibold text-base mb-3 text-foreground">
-                          New Templates
-                        </h3>
-                        <ul className="space-y-2">
-                          {entry.templates.map((template, i) => (
-                            <li key={i} className="flex items-start gap-2">
-                              <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 flex-shrink-0" />
-                              <span className="text-muted-foreground leading-relaxed text-sm">
-                                {template}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
                   </div>
                 </div>
               </div>
